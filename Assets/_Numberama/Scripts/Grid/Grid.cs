@@ -106,6 +106,11 @@ namespace Numberama
             return CoordToIndex(coordinates.x, coordinates.y);
         }
 
+        public bool IsFull()
+        {
+            return _lastCellIndex == Size;
+        }
+
         public GridCell GetCell(int x, int y)
         {
             return _cells[CoordToIndex(x, y)];
@@ -223,7 +228,7 @@ namespace Numberama
             return true;
         }
 
-        public bool  GetNextAvailableMove(out MoveInfo move)
+        public bool GetNextAvailableMove(out MoveInfo move)
         {
             move = new MoveInfo();
 

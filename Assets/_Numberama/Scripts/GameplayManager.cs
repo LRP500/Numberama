@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -109,6 +110,14 @@ namespace Numberama
             }
 
             _moveInfo.Clear();
+
+            // Check if there is still possible moves in the board
+            if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
+            {
+                List<int> remainingNumbers = _grid.GetRemainingNumbers();
+                _grid.Clear();
+                _grid.Push(remainingNumbers);
+            }
         }
 
         #region Editor
