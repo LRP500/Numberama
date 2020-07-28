@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Numberama
@@ -60,6 +61,12 @@ namespace Numberama
         }
 
         #endregion MonoBehaviour
+
+        public void Restart()
+        {
+            _grid.Clear();
+            _grid.Push(_initialPush);
+        }
 
         public void HandleClick(GridCell clicked)
         {

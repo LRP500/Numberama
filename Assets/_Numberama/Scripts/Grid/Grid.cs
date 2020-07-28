@@ -43,6 +43,9 @@ namespace Numberama
             float height = (_size.y * _layout.cellSize.y) + ((_size.y - 1) * _layout.spacing.y);
             RectTransform rectTransform = GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(width, height);
+
+            // Reset cell index
+            _lastCellIndex = 0;
         }
 
         public void Push(int count)
@@ -52,6 +55,18 @@ namespace Numberama
             {
                 _cells[_lastCellIndex] = PushNumber(Random.Range(1, 10));
             }
+        }
+
+        public void Clear()
+        {
+            // Destroy all cells
+            for (int i = 0; i < _cells.Length && _cells[i] != null; i++)
+            {
+                Destroy(_cells[i].gameObject);
+            }
+
+            // Reinit grid
+            Initialize();
         }
 
         public void Push(List<int> numbers)
