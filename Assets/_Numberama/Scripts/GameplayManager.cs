@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -111,7 +110,11 @@ namespace Numberama
 
             _moveInfo.Clear();
 
-            // Check if there is still possible moves in the board
+            CheckForNotBlockedBoard();
+        }
+
+        private void CheckForNotBlockedBoard()
+        {
             if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
             {
                 List<int> remainingNumbers = _grid.GetRemainingNumbers();
@@ -127,6 +130,7 @@ namespace Numberama
         public void Check()
         {
             _grid.Push(_grid.GetRemainingNumbers());
+            CheckForNotBlockedBoard();
         }
 
         [Button]
