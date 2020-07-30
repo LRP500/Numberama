@@ -149,6 +149,7 @@ MonoBehaviour:
   _number: {fileID: 2567722650286491831}
   _background: {fileID: 1966773946515174611}
   _canvasGroup: {fileID: -6814499049570599209}
+  _coordinatesDisplay: 
 --- !u!1 &7424338965628605182
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +216,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c250a7c4c507734c88bc1ee171e504a, type: 2}
+  m_sharedMaterial: {fileID: -766234509952278041, guid: 9c250a7c4c507734c88bc1ee171e504a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -241,8 +243,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54
-  m_fontSizeBase: 54
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

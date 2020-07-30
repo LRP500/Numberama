@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5077856b6fdf54ab1271fcad697aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 9, y: 12}
+  _size: {x: 9, y: 5}
   _cellPrefab: {fileID: 1448667517714843053, guid: a93b24540e5d6704d9e993a93729ced7,
     type: 3}
   _layout: {fileID: 1273181309}

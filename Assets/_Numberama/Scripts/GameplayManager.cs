@@ -94,13 +94,13 @@ namespace Numberama
                 // Clear first number's row if necessary
                 if (_grid.IsRowEmpty(_moveInfo.first.Coordinates.y))
                 {
-                    _grid.ClearRow(_moveInfo.first.Coordinates.y);
+                    StartCoroutine(_grid.ClearRow(_moveInfo.first.Coordinates.y));
                 }
 
                 // Clear second number's row if different from the first and necessary
                 if (vertical && _grid.IsRowEmpty(_moveInfo.second.Coordinates.y))
                 {
-                    _grid.ClearRow(_moveInfo.second.Coordinates.y);
+                    StartCoroutine(_grid.ClearRow(_moveInfo.second.Coordinates.y));
                 }
             }
             else
@@ -147,7 +147,7 @@ namespace Numberama
         [ShowIf("@ UnityEngine.Application.isPlaying")]
         public void ClearRow(int row)
         {
-            _grid.ClearRow(row);
+            StartCoroutine(_grid.ClearRow(row));
         }
 
         #endregion Editor

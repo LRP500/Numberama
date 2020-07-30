@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Numberama.GameplayManager;
@@ -53,7 +54,7 @@ namespace Numberama
             int length = Mathf.Min(_lastCellIndex + count, Size);
             for (; _lastCellIndex < length; _lastCellIndex++)
             {
-                _cells[_lastCellIndex] = PushNumber(Random.Range(1, 10));
+                _cells[_lastCellIndex] = PushNumber(Random.Range(1, 2));
             }
         }
 
@@ -173,7 +174,7 @@ namespace Numberama
             return remainingNumbers;
         }
 
-        public void ClearRow(int row)
+        public IEnumerator ClearRow(int row)
         {
             int origin = _size.x * row;
             int cellCleared = 0;
@@ -188,6 +189,7 @@ namespace Numberama
                 }
 
                 Destroy(cell.gameObject);
+                _cells[origin + i] = null;
                 cellCleared++;
             }
 
@@ -207,6 +209,8 @@ namespace Numberama
                 _cells[i - _size.x] = cell;
                 _cells[i] = null;
             }
+
+            yield return new WaitForEndOfFrame();
         }
 
         public bool IsRowEmpty(int row)
