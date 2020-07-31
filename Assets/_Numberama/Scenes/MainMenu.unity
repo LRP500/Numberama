@@ -653,7 +653,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 171.75
+  m_fontSize: 171.7
   m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1491,6 +1491,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 447852198}
     m_Modifications:
+    - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1718559869266372253, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_LocalPosition.x
