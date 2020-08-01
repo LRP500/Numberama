@@ -56,6 +56,8 @@ namespace Numberama
 
         private MoveInfo _moveInfo = default;
 
+        private List<int> _lastStartingNumbers = null;
+
         #region MonoBehaviour
 
         private void Awake()
@@ -65,8 +67,7 @@ namespace Numberama
 
         private void Start()
         {
-            _grid.Initialize();
-            _grid.Push(_initialPush);
+            StartGame();
         }
 
         private void Update()
@@ -84,10 +85,21 @@ namespace Numberama
 
         #endregion MonoBehaviour
 
-        public void Restart()
+        public void StartGame()
         {
             _grid.Clear();
-            _grid.Push(_initialPush);
+            _lastStartingNumbers = _grid.Push(_initialPush);
+        }
+
+        public void Restart()
+        {
+            StartGame();
+        }
+
+        public void Continue()
+        {
+            _grid.Clear();
+            _grid.Push(_lastStartingNumbers);
         }
 
         public void HandleClick(GridCell clicked)

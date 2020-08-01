@@ -31,7 +31,7 @@ namespace Numberama
             _size = new Vector2Int(rows, columns);
         }
 
-        public void Initialize()
+        private void Initialize()
         {
             _cells = new GridCell[_size.y * _size.x];
 
@@ -49,21 +49,30 @@ namespace Numberama
             _lastCellIndex = 0;
         }
 
-        public void Push(int count)
+        public List<int> Push(int count)
         {
+            List<int> pushed = new List<int>();
+
             int length = Mathf.Min(_lastCellIndex + count, Size);
             for (; _lastCellIndex < length; _lastCellIndex++)
             {
-                _cells[_lastCellIndex] = PushNumber(Random.Range(1, 10));
+                GridCell cell = PushNumber(Random.Range(1, 10));
+                _cells[_lastCellIndex] = cell;
+                pushed.Add(cell.Number);
             }
+
+            return pushed;
         }
 
         public void Clear()
         {
-            // Destroy all cells
-            for (int i = 0; i < _cells.Length && _cells[i] != null; i++)
+            if (_cells != null)
             {
-                Destroy(_cells[i].gameObject);
+                // Destroy all cells
+                for (int i = 0; i < _cells.Length && _cells[i] != null; i++)
+                {
+                    Destroy(_cells[i].gameObject);
+                }
             }
 
             // Reinit grid

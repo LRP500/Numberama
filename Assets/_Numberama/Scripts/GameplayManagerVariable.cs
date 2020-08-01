@@ -8,6 +8,7 @@ namespace Numberama
     {
         public void OnClickContinue()
         {
+            Value.Continue();
         }
 
         public void OnClickRestart()
