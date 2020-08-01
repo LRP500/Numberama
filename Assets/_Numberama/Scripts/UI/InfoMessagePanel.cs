@@ -23,10 +23,9 @@ namespace Numberama
         private Transform _choiceContainer = null;
 
         [SerializeField]
-        private InfoMessage _infoMessage = null;
-
-        [SerializeField]
         private ContentSizeFitter _contentSizeFitter = null;
+
+        private InfoMessage _infoMessage = null;
 
         private List<InfoMessagePanelChoice> _choices = null;
 
@@ -44,14 +43,9 @@ namespace Numberama
             _infoMessage = infoMessage;
         }
 
-        public void Initialize()
+        public void Initialize(InfoMessage data)
         {
-            // Panel already in use
-            if (_isOpen)
-            {
-                return;
-            }
-
+            _infoMessage = data;
             _messageTMP.text = _infoMessage.Message;
 
             foreach (InfoMessageChoice choice in _infoMessage.Choices)
@@ -70,13 +64,20 @@ namespace Numberama
             }
 
             _choices.Clear();
+
             _messageTMP.text = string.Empty;
         }
 
         [Button]
-        public void Open()
+        [ShowIf("@ UnityEngine.Application.isPlaying")]
+        public void Open(InfoMessage data)
         {
-            Initialize();
+            if (_isOpen)
+            {
+                Close();
+            }
+
+            Initialize(data);
             StartCoroutine(RefreshLayoutAndOpen());
         }
 
@@ -88,16 +89,28 @@ namespace Numberama
             yield return new WaitForEndOfFrame();
 
             _contentSizeFitter.enabled = true;
+
+            Show();
+        }
+
+        public void Close()
+        {
+            Hide();
+            Clear();
+            _isOpen = false;
+        }
+
+        [Button]
+        public void Show()
+        {
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         }
 
         [Button]
-        public void Close()
+        public void Hide()
         {
-            Clear();
-            _isOpen = false;
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;

@@ -21,6 +21,7 @@ namespace Numberama
         {
             _runtimeReference.SetValue(this);
 
+            InitializePlayerPrefs();
             NavigateToMainMenu();
         }
 
@@ -37,6 +38,11 @@ namespace Numberama
         public void LaunchGame()
         {
             StartCoroutine(_navigationManager.FastLoad(_gameScene));
+        }
+
+        private void InitializePlayerPrefs()
+        {
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasPlayedTutorial, 0);
         }
     }
 }

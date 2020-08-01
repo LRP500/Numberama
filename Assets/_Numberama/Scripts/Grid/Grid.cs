@@ -54,7 +54,7 @@ namespace Numberama
             int length = Mathf.Min(_lastCellIndex + count, Size);
             for (; _lastCellIndex < length; _lastCellIndex++)
             {
-                _cells[_lastCellIndex] = PushNumber(Random.Range(1, 2));
+                _cells[_lastCellIndex] = PushNumber(Random.Range(1, 10));
             }
         }
 

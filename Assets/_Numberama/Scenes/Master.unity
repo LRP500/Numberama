@@ -293,8 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e620d2b9a3caff4e9bfdf6a9cb278b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundtrackSource: {fileID: 71876549}
   _soundtrack: {fileID: 8300000, guid: 0d3d1b761cfd7614e9d36c20c816fb81, type: 3}
+  _soundtrackSource: {fileID: 71876549}
   _runtimeReference: {fileID: 11400000, guid: a94b91a435a0f0242a9be0f4501d330d, type: 2}
 --- !u!1 &1398708299
 GameObject:

@@ -42,9 +42,26 @@ namespace Numberama
         [SerializeField]
         private int _initialPush = 20;
 
+        [Header("Info Messages")]
+
+        [SerializeField]
+        private InfoMessagePanel _infoMessagePanel = null;
+
+        [SerializeField]
+        private InfoMessage _noMoreMovesInfoMessage = null;
+
+        [Space]
+        [SerializeField]
+        private GameplayManagerVariable _runtimeReference = null;
+
         private MoveInfo _moveInfo = default;
 
         #region MonoBehaviour
+
+        private void Awake()
+        {
+            _runtimeReference.SetValue(this);
+        }
 
         private void Start()
         {
@@ -58,6 +75,11 @@ namespace Numberama
             {
                 Check();
             }
+        }
+
+        private void OnDestroy()
+        {
+            _runtimeReference.Clear();
         }
 
         #endregion MonoBehaviour
@@ -110,16 +132,24 @@ namespace Numberama
 
             _moveInfo.Clear();
 
-            CheckForNotBlockedBoard();
+            CheckForBlockedBoard();
         }
 
-        private void CheckForNotBlockedBoard()
+        private void CheckForBlockedBoard()
         {
             if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
             {
                 List<int> remainingNumbers = _grid.GetRemainingNumbers();
-                _grid.Clear();
-                _grid.Push(remainingNumbers);
+
+                if (remainingNumbers.Count == _grid.Size)
+                {
+                    _infoMessagePanel.Open(_noMoreMovesInfoMessage);
+                }
+                else
+                {
+                    _grid.Clear();
+                    _grid.Push(remainingNumbers);
+                }
             }
         }
 
@@ -130,7 +160,7 @@ namespace Numberama
         public void Check()
         {
             _grid.Push(_grid.GetRemainingNumbers());
-            CheckForNotBlockedBoard();
+            CheckForBlockedBoard();
         }
 
         [Button]

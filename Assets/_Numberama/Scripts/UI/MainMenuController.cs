@@ -9,9 +9,6 @@ namespace Numberama
         private Button _newGameButton = null;
 
         [SerializeField]
-        private Button _continueButton = null;
-
-        [SerializeField]
         private SettingToggle _muteToggle = null;
 
         [SerializeField]
@@ -20,7 +17,15 @@ namespace Numberama
         [SerializeField]
         private AudioManagerVariable _audioManager = null;
 
-        private void Awake()
+        [Header("Info Messages")]
+
+        [SerializeField]
+        private InfoMessagePanel _infoMessagePanel = null;
+
+        [SerializeField]
+        private InfoMessage _welcomeMessage = null;
+
+        private void Start()
         {
             if (_audioManager.Value)
             {
@@ -29,8 +34,21 @@ namespace Numberama
 
             if (_gameMaster.Value)
             {
-                _newGameButton.onClick.AddListener(_gameMaster.Value.LaunchGame);
+                if (PlayerPrefs.GetInt(PlayerPrefKeys.HasPlayedTutorial) == 0)
+                {
+                    _newGameButton.onClick.AddListener(OnPlayButtonClicked);
+                }
+                else
+                {
+                    _newGameButton.onClick.AddListener(_gameMaster.Value.LaunchGame);
+                }
             }
+        }
+
+        private void OnPlayButtonClicked()
+        {
+            _infoMessagePanel.Open(_welcomeMessage);
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasPlayedTutorial, 1);
         }
     }
 }
