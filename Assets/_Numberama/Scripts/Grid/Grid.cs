@@ -6,7 +6,7 @@ using static Numberama.GameplayManager;
 
 namespace Numberama
 {
-    public class Grid : MonoBehaviour
+    public class Grid : MonoBehaviour, ISavable
     {
         [SerializeField]
         private Vector2Int _size = new Vector2Int(10, 10);
@@ -50,21 +50,6 @@ namespace Numberama
             _lastCellIndex = 0;
         }
 
-        public List<int> Push(int count)
-        {
-            List<int> pushed = new List<int>();
-
-            int length = Mathf.Min(_lastCellIndex + count, Size);
-            for (; _lastCellIndex < length; _lastCellIndex++)
-            {
-                GridCell cell = PushNumber(Random.Range(1, 10));
-                _cells[_lastCellIndex] = cell;
-                pushed.Add(cell.Number);
-            }
-
-            return pushed;
-        }
-
         public void Clear()
         {
             if (_cells != null)
@@ -80,29 +65,48 @@ namespace Numberama
             Initialize();
         }
 
-        public void Push(List<int> numbers)
+        public List<int> PushRange(int count)
+        {
+            List<int> pushed = new List<int>();
+
+            int length = Mathf.Min(_lastCellIndex + count, Size);
+            for (; _lastCellIndex < length; _lastCellIndex++)
+            {
+                GridCell cell = Push(Random.Range(1, 10));
+                _cells[_lastCellIndex] = cell;
+                pushed.Add(cell.Number);
+            }
+
+            return pushed;
+        }
+
+        public void PushRange(List<int> numbers)
         {
             foreach (int number in numbers)
             {
                 if (_lastCellIndex >= Size) break;
 
-                _cells[_lastCellIndex] = PushNumber(number);
+                _cells[_lastCellIndex] = Push(number);
                 _lastCellIndex++;
             }
         }
 
-        private GridCell PushNumber(int number)
+        private GridCell Push(GridCell.CellState state)
         {
             GridCell cell = Instantiate(_cellPrefab, transform);
             cell.SetCallback(_gameplayManager.HandleClick);
+            cell.SetState(state);
+            return cell;
+        }
 
-            cell.SetState(new GridCell.CellState
+        private GridCell Push(int number)
+        {
+            return Push(new GridCell.CellState
             {
                 coordinates = IndexToCoord(_lastCellIndex),
+                isChecked = false,
                 number = number
             });
-
-            return cell;
         }
 
         private Vector2Int IndexToCoord(int index)
@@ -341,5 +345,44 @@ namespace Numberama
 
             return null;
         }
+
+        #region Save
+
+        public SaveData Save()
+        {
+            GridSaveData data = new GridSaveData(Size);
+
+            for (int i = 0; i < Size; i++)
+            {
+                if (_cells[i] == null)
+                {
+                    break;
+                }
+
+                data.SetCell(i, _cells[i].State);
+            }
+
+            return data;
+        }
+
+        public void Restore(SaveData data)
+        {
+            // Is save data valid ?
+            if (!(data is GridSaveData gridData) || gridData.Cells.Length != Size)
+            {
+                Debug.LogError($"[{name}] Invalid or incompatible save data");
+                return;
+            }
+
+            Clear();
+
+            for (int i = 0; i < Size; i++)
+            {
+                _cells[i] = Push(gridData.Cells[i]);
+                _lastCellIndex++;
+            }
+        }
+
+        #endregion Save
     }
 }

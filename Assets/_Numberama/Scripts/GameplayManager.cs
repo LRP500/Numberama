@@ -49,6 +49,9 @@ namespace Numberama
         private int _initialPush = 20;
 
         [SerializeField]
+        private int _historyCapacity = 10;
+
+        [SerializeField]
         private GameMasterVariable _gameMaster = null;
 
         [SerializeField]
@@ -73,8 +76,6 @@ namespace Numberama
         private MoveInfo _moveInfo = default;
 
         private List<int> _lastStartingNumbers = null;
-
-        private List<MoveInfo> _history = null;
 
         #endregion Private Fields
 
@@ -126,6 +127,8 @@ namespace Numberama
                 {
                     StartCoroutine(_grid.ClearRow(_moveInfo.second.Coordinates.y));
                 }
+
+                CheckGameOverConditions();
             }
             else
             {
@@ -133,8 +136,6 @@ namespace Numberama
             }
 
             _moveInfo.Clear();
-
-            CheckGameOverConditions();
         }
 
         private void CheckGameOverConditions()
@@ -153,7 +154,7 @@ namespace Numberama
                 if (remainingNumbers.Count != _grid.Size)
                 {
                     _grid.Clear();
-                    _grid.Push(remainingNumbers);
+                    _grid.PushRange(remainingNumbers);
                 }
                 // Nothing to clear
                 else
@@ -168,7 +169,7 @@ namespace Numberama
         public void StartGame()
         {
             _grid.Clear();
-            _lastStartingNumbers = _grid.Push(_initialPush);
+            _lastStartingNumbers = _grid.PushRange(_initialPush);
         }
 
         public void Restart()
@@ -179,7 +180,7 @@ namespace Numberama
         public void Continue()
         {
             _grid.Clear();
-            _grid.Push(_lastStartingNumbers);
+            _grid.PushRange(_lastStartingNumbers);
         }
 
         public void Undo()
@@ -207,7 +208,7 @@ namespace Numberama
         [ShowIf("@ UnityEngine.Application.isPlaying")]
         public void Check()
         {
-            _grid.Push(_grid.GetRemainingNumbers());
+            _grid.PushRange(_grid.GetRemainingNumbers());
             CheckGameOverConditions();
         }
 
