@@ -42,17 +42,19 @@ namespace Numberama
         [SerializeField]
         private int _initialPush = 20;
 
-        [Header("Info Messages")]
+        [SerializeField]
+        private GameMasterVariable _gameMaster = null;
 
         [SerializeField]
+        private GameplayManagerVariable _runtimeReference = null;
+
+        [SerializeField]
+        [BoxGroup("Info Messages")]
         private InfoMessagePanel _infoMessagePanel = null;
 
         [SerializeField]
-        private InfoMessage _noMoreMovesInfoMessage = null;
-
-        [Space]
-        [SerializeField]
-        private GameplayManagerVariable _runtimeReference = null;
+        [BoxGroup("Info Messages")]
+        private InfoMessage _noMoreMovesMessage = null;
 
         private MoveInfo _moveInfo = default;
 
@@ -72,9 +74,9 @@ namespace Numberama
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Check();
+                _gameMaster.Value?.NavigateToMainMenu();
             }
         }
 
@@ -155,7 +157,7 @@ namespace Numberama
 
                 if (remainingNumbers.Count == _grid.Size)
                 {
-                    _infoMessagePanel.Open(_noMoreMovesInfoMessage);
+                    _infoMessagePanel.Open(_noMoreMovesMessage);
                 }
                 else
                 {

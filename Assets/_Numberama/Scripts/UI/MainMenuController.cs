@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tools.Navigation;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Numberama
@@ -42,6 +43,14 @@ namespace Numberama
                 {
                     _newGameButton.onClick.AddListener(_gameMaster.Value.LaunchGame);
                 }
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                NavigationManager.QuitGame();
             }
         }
 
