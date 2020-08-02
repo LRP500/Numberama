@@ -14,6 +14,9 @@ namespace Numberama
         private CanvasGroup _canvasGroup = null;
 
         [SerializeField]
+        private ContentSizeFitter _contentSizeFitter = null;
+
+        [SerializeField]
         private TextMeshProUGUI _messageTMP = null;
 
         [SerializeField]
@@ -21,9 +24,6 @@ namespace Numberama
 
         [SerializeField]
         private Transform _choiceContainer = null;
-
-        [SerializeField]
-        private ContentSizeFitter _contentSizeFitter = null;
 
         private InfoMessage _infoMessage = null;
 
