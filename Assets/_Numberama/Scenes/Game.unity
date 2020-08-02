@@ -267,6 +267,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5302987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &115662783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 665695129210475804, guid: 0c991af18b9d673479e10fdc07dd813b,
+    type: 3}
+  m_PrefabInstance: {fileID: 194275459}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e04e99155f89b647b02d3a5e9d7923c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &194275459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,6 +547,7 @@ MonoBehaviour:
   _checkAction: {fileID: 1784563896}
   _tipAction: {fileID: 2029904850}
   _restartAction: {fileID: 1358348109}
+  _undoAction: {fileID: 115662783}
   _gameplayManager: {fileID: 2061064953}
 --- !u!114 &281336894
 MonoBehaviour:
@@ -1112,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 1273181310}
-  _initialPush: 20
+  _initialPush: 2
   _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
   _runtimeReference: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
   _infoMessagePanel: {fileID: 458814743}

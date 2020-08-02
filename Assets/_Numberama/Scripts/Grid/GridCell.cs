@@ -8,6 +8,23 @@ namespace Numberama
 {
     public sealed class GridCell : MonoBehaviour, IPointerDownHandler
     {
+        #region State
+
+        public class CellState
+        {
+            public Vector2Int coordinates = default;
+            public bool isChecked = false;
+            public int number = 0;
+        }
+
+        public CellState State { get; private set; } = default;
+
+        public Vector2Int Coordinates => State.coordinates;
+        public bool IsChecked => State.isChecked;
+        public int Number => State.number;
+
+        #endregion State
+
         [SerializeField]
         private TextMeshProUGUI _number = null;
 
@@ -17,9 +34,6 @@ namespace Numberama
         [SerializeField]
         private CanvasGroup _canvasGroup = null;
 
-        public Vector2Int Coordinates { get; private set; } = default;
-        public int Number { get; private set; } = 0;
-        public bool Checked { get; private set; } = false;
         public bool Selected { get; private set; } = false;
 
         private System.Action<GridCell> _callback = null;
@@ -28,22 +42,20 @@ namespace Numberama
         [LabelText("Coordinates")]
         public string _coordinatesDisplay = string.Empty;
 
-        public void Initialize(GridCell other)
+        private void Awake()
         {
-            SetNumber(other.Number);
-            SetChecked(other.Checked);
+            State = new CellState();
+        }
+
+        public void SetState(CellState state)
+        {
+            State = state;
+            Refresh();
         }
 
         public void SetCoordinates(Vector2Int coordinates)
         {
-            Coordinates = coordinates;
-            _coordinatesDisplay = $"{coordinates.x} : {coordinates.y}";
-        }
-
-        public void SetNumber(int number)
-        {
-            Number = number;
-            Refresh();
+            State.coordinates = coordinates;
         }
 
         public void SetCallback(System.Action<GridCell> callback)
@@ -53,16 +65,19 @@ namespace Numberama
 
         private void Refresh()
         {
-            _number.text = Number.ToString();
+#if UNITY_EDITOR
+            _coordinatesDisplay = $"{State.coordinates.x} : {State.coordinates.y}";
+#endif
+            _number.text = State.number.ToString();
         }
 
         public void SetChecked(bool value)
         {
             SetSelected(false);
-            Checked = value;
-            _canvasGroup.alpha = Checked ? 0.2f : 1;
-            _canvasGroup.interactable = !Checked;
-            _canvasGroup.blocksRaycasts = !Checked;
+            State.isChecked = value;
+            _canvasGroup.alpha = State.isChecked ? 0.2f : 1;
+            _canvasGroup.interactable = !State.isChecked;
+            _canvasGroup.blocksRaycasts = !State.isChecked;
         }
 
         public void SetSelected(bool value)

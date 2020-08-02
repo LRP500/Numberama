@@ -94,8 +94,13 @@ namespace Numberama
         {
             GridCell cell = Instantiate(_cellPrefab, transform);
             cell.SetCallback(_gameplayManager.HandleClick);
-            cell.SetCoordinates(IndexToCoord(_lastCellIndex));
-            cell.SetNumber(number);
+
+            cell.SetState(new GridCell.CellState
+            {
+                coordinates = IndexToCoord(_lastCellIndex),
+                number = number
+            });
+
             return cell;
         }
 
@@ -174,7 +179,7 @@ namespace Numberama
 
             for (int i = 0; i < _cells.Length && _cells[i] != null; i++)
             {
-                if (!_cells[i].Checked)
+                if (!_cells[i].IsChecked)
                 {
                     remainingNumbers.Add(_cells[i].Number);
                 }
@@ -232,7 +237,7 @@ namespace Numberama
                 {
                     break;
                 }
-                else if (cell.Checked == false)
+                else if (cell.IsChecked == false)
                 {
                     return false;
                 }
@@ -248,7 +253,7 @@ namespace Numberama
             for (int i = 0; i < _cells.Length; i++)
             {
                 if (_cells[i] == null) return false;
-                if (_cells[i].Checked) continue;
+                if (_cells[i].IsChecked) continue;
 
                 move.first = _cells[i];
 
@@ -288,7 +293,7 @@ namespace Numberama
         {
             for (int i = index - 1; i >= 0; i--)
             {
-                if (_cells[i] && !_cells[i].Checked)
+                if (_cells[i] && !_cells[i].IsChecked)
                 {
                     return _cells[i];
                 }
@@ -301,7 +306,7 @@ namespace Numberama
         {
             for (int i = index + 1; i < _lastCellIndex; i++)
             {
-                if (_cells[i] && !_cells[i].Checked)
+                if (_cells[i] && !_cells[i].IsChecked)
                 {
                     return _cells[i];
                 }
@@ -314,7 +319,7 @@ namespace Numberama
         {
             for (int i = index - _size.x; i >= 0; i -= _size.x)
             {
-                if (_cells[i] && !_cells[i].Checked)
+                if (_cells[i] && !_cells[i].IsChecked)
                 {
                     return _cells[i];
                 }
@@ -327,7 +332,7 @@ namespace Numberama
         {
             for (int i = index + _size.x; i < _lastCellIndex; i += _size.x)
             {
-                if (_cells[i] && !_cells[i].Checked)
+                if (_cells[i] && !_cells[i].IsChecked)
                 {
                     return _cells[i];
                 }
