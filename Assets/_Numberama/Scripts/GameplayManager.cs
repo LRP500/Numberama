@@ -6,6 +6,8 @@ namespace Numberama
 {
     public class GameplayManager : MonoBehaviour
     {
+        #region Data Structures
+
         public struct MoveInfo
         {
             public GridCell first;
@@ -36,6 +38,10 @@ namespace Numberama
             }
         }
 
+        #endregion Data Structures
+
+        #region Serialized Fields
+
         [SerializeField]
         private Grid _grid = null;
 
@@ -56,9 +62,17 @@ namespace Numberama
         [BoxGroup("Info Messages")]
         private InfoMessage _noMoreMovesMessage = null;
 
+        #endregion Serialized Fields
+
+        #region Private Fields
+
         private MoveInfo _moveInfo = default;
 
         private List<int> _lastStartingNumbers = null;
+
+        private List<MoveInfo> _history = null;
+
+        #endregion Private Fields
 
         #region MonoBehaviour
 
@@ -87,37 +101,7 @@ namespace Numberama
 
         #endregion MonoBehaviour
 
-        public void StartGame()
-        {
-            _grid.Clear();
-            _lastStartingNumbers = _grid.Push(_initialPush);
-        }
-
-        public void Restart()
-        {
-            StartGame();
-        }
-
-        public void Continue()
-        {
-            _grid.Clear();
-            _grid.Push(_lastStartingNumbers);
-        }
-
-        public void HandleClick(GridCell clicked)
-        {
-            clicked.SetSelected(true);
-
-            if (_moveInfo.first == null)
-            {
-                _moveInfo.first = clicked;
-            }
-            else if (_moveInfo.second == null && clicked != _moveInfo.first)
-            {
-                _moveInfo.second = clicked;
-                ExecuteMove();
-            }
-        }
+        #region Private Methods
 
         private void ExecuteMove()
         {
@@ -164,6 +148,44 @@ namespace Numberama
                     _grid.Clear();
                     _grid.Push(remainingNumbers);
                 }
+            }
+        }
+
+        #endregion Private Methods
+
+        public void StartGame()
+        {
+            _grid.Clear();
+            _lastStartingNumbers = _grid.Push(_initialPush);
+        }
+
+        public void Restart()
+        {
+            StartGame();
+        }
+
+        public void Continue()
+        {
+            _grid.Clear();
+            _grid.Push(_lastStartingNumbers);
+        }
+
+        public void Undo()
+        {
+        }
+
+        public void HandleClick(GridCell clicked)
+        {
+            clicked.SetSelected(true);
+
+            if (_moveInfo.first == null)
+            {
+                _moveInfo.first = clicked;
+            }
+            else if (_moveInfo.second == null && clicked != _moveInfo.first)
+            {
+                _moveInfo.second = clicked;
+                ExecuteMove();
             }
         }
 

@@ -14,6 +14,9 @@ namespace Numberama
         private GridAction _restartAction = null;
 
         [SerializeField]
+        private GridAction _undoAction = null;
+
+        [SerializeField]
         private GameplayManager _gameplayManager = null;
 
         private void Awake()
@@ -21,6 +24,7 @@ namespace Numberama
             _checkAction.RegisterOnExecute(_gameplayManager.Check);
             _tipAction.RegisterOnExecute(_gameplayManager.AskForTip);
             _restartAction.RegisterOnExecute(_gameplayManager.Restart);
+            _undoAction.RegisterOnExecute(_gameplayManager.Undo);
         }
     }
 }
