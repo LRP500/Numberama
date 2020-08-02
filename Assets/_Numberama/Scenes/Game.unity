@@ -1125,12 +1125,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 1273181310}
-  _initialPush: 2
+  _initialPush: 3
   _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
   _runtimeReference: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
   _infoMessagePanel: {fileID: 458814743}
   _noMoreMovesMessage: {fileID: 11400000, guid: 60f415dfa8e7d4d4aa18caca3a9f08f8,
     type: 2}
+  _victoryMessage: {fileID: 11400000, guid: f214e5592d1b4874cb8a0782e1be3799, type: 2}
 --- !u!1 &2117817640
 GameObject:
   m_ObjectHideFlags: 0

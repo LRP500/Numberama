@@ -23,6 +23,7 @@ namespace Numberama
         private GridCell[] _cells = null;
 
         public int Size => _size.x * _size.y;
+        public bool IsEmpty => _lastCellIndex == 0;
 
         private int _lastCellIndex = 0;
 

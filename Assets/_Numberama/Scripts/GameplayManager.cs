@@ -62,6 +62,10 @@ namespace Numberama
         [BoxGroup("Info Messages")]
         private InfoMessage _noMoreMovesMessage = null;
 
+        [SerializeField]
+        [BoxGroup("Info Messages")]
+        private InfoMessage _victoryMessage = null;
+
         #endregion Serialized Fields
 
         #region Private Fields
@@ -130,23 +134,31 @@ namespace Numberama
 
             _moveInfo.Clear();
 
-            CheckForBlockedBoard();
+            CheckGameOverConditions();
         }
 
-        private void CheckForBlockedBoard()
+        private void CheckGameOverConditions()
         {
-            if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
+            // Victory
+            if (_grid.IsEmpty)
+            {
+                _infoMessagePanel.Open(_victoryMessage);
+            }
+            // Failed
+            else if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
             {
                 List<int> remainingNumbers = _grid.GetRemainingNumbers();
 
-                if (remainingNumbers.Count == _grid.Size)
-                {
-                    _infoMessagePanel.Open(_noMoreMovesMessage);
-                }
-                else
+                // Clear all checked cells
+                if (remainingNumbers.Count != _grid.Size)
                 {
                     _grid.Clear();
                     _grid.Push(remainingNumbers);
+                }
+                // Nothing to clear
+                else
+                {
+                    _infoMessagePanel.Open(_noMoreMovesMessage);
                 }
             }
         }
@@ -196,7 +208,7 @@ namespace Numberama
         public void Check()
         {
             _grid.Push(_grid.GetRemainingNumbers());
-            CheckForBlockedBoard();
+            CheckGameOverConditions();
         }
 
         [Button]
