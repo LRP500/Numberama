@@ -11,6 +11,7 @@ namespace Tools.Persistence
         private Stack<string> _history = null;
 
         public bool SaveFileExists => File.Exists(_savePath);
+        public int HistorySize => _history.Count;
 
         private void Awake()
         {
@@ -64,11 +65,11 @@ namespace Tools.Persistence
 
         #endregion History
 
-        public static Stream GenerateStreamFromString(string s)
+        public static Stream GenerateStreamFromString(string value)
         {
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
-            writer.Write(s);
+            writer.Write(value);
             writer.Flush();
             stream.Position = 0;
             return stream;

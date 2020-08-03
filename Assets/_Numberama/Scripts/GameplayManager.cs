@@ -57,9 +57,6 @@ namespace Numberama
         private int _initialPush = 20;
 
         [SerializeField]
-        private int _historyCapacity = 10;
-
-        [SerializeField]
         private PersistentStorage _storage = null;
 
         [SerializeField]
@@ -81,6 +78,12 @@ namespace Numberama
         private InfoMessage _victoryMessage = null;
 
         #endregion Serialized Fields
+
+        #region Properties
+
+        public int UndoStackSize => _storage.HistorySize;
+
+        #endregion Properties
 
         #region Private Fields
 
@@ -265,10 +268,13 @@ namespace Numberama
         [ShowIf("@ UnityEngine.Application.isPlaying")]
         public void Check()
         {
-            _storage.Record(_grid);
-            _grid.PushRange(_grid.GetRemainingNumbers());
-            CheckGameOverConditions();
-            Save();
+            if (!_grid.IsFull())
+            {
+                _storage.Record(_grid);
+                _grid.PushRange(_grid.GetRemainingNumbers());
+                CheckGameOverConditions();
+                Save();
+            }
         }
 
         [Button]

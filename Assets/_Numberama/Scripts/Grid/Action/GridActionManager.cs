@@ -19,12 +19,17 @@ namespace Numberama
         [SerializeField]
         private GameplayManager _gameplayManager = null;
 
-        private void Awake()
+        private void Start()
         {
             _checkAction.RegisterOnExecute(_gameplayManager.Check);
             _tipAction.RegisterOnExecute(_gameplayManager.AskForHint);
             _restartAction.RegisterOnExecute(_gameplayManager.RestartWithNewNumbers);
             _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove);
+        }
+
+        private void Update()
+        {
+            _undoAction.SetStackValue(_gameplayManager.UndoStackSize);
         }
     }
 }
