@@ -146,7 +146,7 @@ namespace Numberama
         private void Save()
         {
             _storage.Save(_grid);
-            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 1);
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, _grid.IsEmpty ? 0 : 1);
             PlayerPrefs.Save();
         }
 
@@ -218,7 +218,6 @@ namespace Numberama
 
         private void OnVictory()
         {
-            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 0);
             _infoMessagePanel.Open(_victoryMessage);
         }
 

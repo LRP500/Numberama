@@ -73,7 +73,7 @@ namespace Numberama
             int length = Mathf.Min(_lastCellIndex + count, Size);
             for (; _lastCellIndex < length; _lastCellIndex++)
             {
-                GridCell cell = Push(Random.Range(1, 10));
+                GridCell cell = Push(Random.Range(1, 2));
                 _cells[_lastCellIndex] = cell;
                 pushed.Add(cell.Number);
             }
