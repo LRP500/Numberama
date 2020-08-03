@@ -154,6 +154,8 @@ namespace Numberama
         {
             if (_grid.IsValidMove(_currentMove))
             {
+                _storage.Record(_grid);
+
                 _currentMove.Check();
 
                 bool vertical = _currentMove.first.Coordinates.y != _currentMove.second.Coordinates.y;
@@ -226,16 +228,20 @@ namespace Numberama
         public void RestartWithNewNumbers()
         {
             StartNewGame();
+            _storage.ClearUndoHistory(_grid);
         }
 
         public void RestartWithSameNumbers()
         {
             _grid.Clear();
             _grid.PushRange(_lastStartingNumbers);
+            _storage.ClearUndoHistory(_grid);
         }
 
         public void UndoLastMove()
         {
+            _storage.Undo(_grid);
+            _storage.Save(_grid);
         }
 
         public void HandleClick(GridCell clicked)
@@ -259,6 +265,7 @@ namespace Numberama
         [ShowIf("@ UnityEngine.Application.isPlaying")]
         public void Check()
         {
+            _storage.Record(_grid);
             _grid.PushRange(_grid.GetRemainingNumbers());
             CheckGameOverConditions();
             Save();
