@@ -347,7 +347,7 @@ namespace Numberama
             return null;
         }
 
-        #region Save
+        #region Persistence
 
         public void Save(GameDataWriter writer)
         {
@@ -375,6 +375,6 @@ namespace Numberama
             }
         }
 
-        #endregion Save
+        #endregion Persistence
     }
 }
