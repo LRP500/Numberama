@@ -22,9 +22,9 @@ namespace Numberama
         private void Awake()
         {
             _checkAction.RegisterOnExecute(_gameplayManager.Check);
-            _tipAction.RegisterOnExecute(_gameplayManager.AskForTip);
-            _restartAction.RegisterOnExecute(_gameplayManager.Restart);
-            _undoAction.RegisterOnExecute(_gameplayManager.Undo);
+            _tipAction.RegisterOnExecute(_gameplayManager.AskForHint);
+            _restartAction.RegisterOnExecute(_gameplayManager.RestartWithNewNumbers);
+            _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tools.Persistence;
 using UnityEngine;
 
 namespace Numberama
@@ -21,20 +22,27 @@ namespace Numberama
 
             public void ResetState()
             {
-                first.Clear();
-                second.Clear();
+                first?.Clear();
+                second?.Clear();
             }
 
-            public void Highlight()
+            public void Highlight(bool value)
             {
-                first.SetHighlighted(true);
-                second.SetHighlighted(true);
+                if (first != null && first.gameObject != null)
+                {
+                    first.SetHighlighted(value);
+                }
+
+                if (second != null && second.gameObject != null)
+                {
+                    second?.SetHighlighted(value);
+                }
             }
 
             public void Check()
             {
-                first.SetChecked(true);
-                second.SetChecked(true);
+                first?.SetChecked(true);
+                second?.SetChecked(true);
             }
         }
 
@@ -50,6 +58,9 @@ namespace Numberama
 
         [SerializeField]
         private int _historyCapacity = 10;
+
+        [SerializeField]
+        private PersistentStorage _storage = null;
 
         [SerializeField]
         private GameMasterVariable _gameMaster = null;
@@ -73,7 +84,8 @@ namespace Numberama
 
         #region Private Fields
 
-        private MoveInfo _moveInfo = default;
+        private MoveInfo _currentMove = default;
+        private MoveInfo _currentHint = default;
 
         private List<int> _lastStartingNumbers = null;
 
@@ -88,7 +100,18 @@ namespace Numberama
 
         private void Start()
         {
-            StartGame();
+            if (_gameMaster.Value == null ||
+                !_gameMaster.Value.HasGameInProgress() ||
+                !_storage.SaveFileExists)
+            {
+                Debug.Log("Starting new game");
+                StartNewGame();
+            }
+            else
+            {
+                Debug.Log("Loading existing game");
+                _storage.Load(_grid);
+            }
         }
 
         private void Update()
@@ -108,34 +131,57 @@ namespace Numberama
 
         #region Private Methods
 
+        private void StartNewGame()
+        {
+            // Clear
+            _grid.Clear();
+
+            // Initialize
+            _lastStartingNumbers = _grid.PushRange(_initialPush);
+
+            // Save
+            Save();
+        }
+
+        private void Save()
+        {
+            _storage.Save(_grid);
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 1);
+            PlayerPrefs.Save();
+        }
+
         private void ExecuteMove()
         {
-            if (_grid.IsValidMove(_moveInfo))
+            if (_grid.IsValidMove(_currentMove))
             {
-                _moveInfo.Check();
+                _currentMove.Check();
 
-                bool vertical = _moveInfo.first.Coordinates.y != _moveInfo.second.Coordinates.y;
+                bool vertical = _currentMove.first.Coordinates.y != _currentMove.second.Coordinates.y;
 
                 // Clear first number's row if necessary
-                if (_grid.IsRowEmpty(_moveInfo.first.Coordinates.y))
+                if (_grid.IsRowEmpty(_currentMove.first.Coordinates.y))
                 {
-                    StartCoroutine(_grid.ClearRow(_moveInfo.first.Coordinates.y));
+                    StartCoroutine(_grid.ClearRow(_currentMove.first.Coordinates.y));
                 }
 
                 // Clear second number's row if different from the first and necessary
-                if (vertical && _grid.IsRowEmpty(_moveInfo.second.Coordinates.y))
+                if (vertical && _grid.IsRowEmpty(_currentMove.second.Coordinates.y))
                 {
-                    StartCoroutine(_grid.ClearRow(_moveInfo.second.Coordinates.y));
+                    StartCoroutine(_grid.ClearRow(_currentMove.second.Coordinates.y));
                 }
 
                 CheckGameOverConditions();
+
+                Save();
             }
             else
             {
-                _moveInfo.ResetState();
+                _currentMove.ResetState();
             }
 
-            _moveInfo.Clear();
+            ResetHint();
+
+            _currentMove.Clear();
         }
 
         private void CheckGameOverConditions()
@@ -143,7 +189,7 @@ namespace Numberama
             // Victory
             if (_grid.IsEmpty)
             {
-                _infoMessagePanel.Open(_victoryMessage);
+                OnVictory();
             }
             // Failed
             else if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
@@ -164,26 +210,32 @@ namespace Numberama
             }
         }
 
+        private void ResetHint()
+        {
+            _currentHint.Highlight(false);
+            _currentHint.Clear();
+        }
+
+        private void OnVictory()
+        {
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 0);
+            _infoMessagePanel.Open(_victoryMessage);
+        }
+
         #endregion Private Methods
 
-        public void StartGame()
+        public void RestartWithNewNumbers()
         {
-            _grid.Clear();
-            _lastStartingNumbers = _grid.PushRange(_initialPush);
+            StartNewGame();
         }
 
-        public void Restart()
-        {
-            StartGame();
-        }
-
-        public void Continue()
+        public void RestartWithSameNumbers()
         {
             _grid.Clear();
             _grid.PushRange(_lastStartingNumbers);
         }
 
-        public void Undo()
+        public void UndoLastMove()
         {
         }
 
@@ -191,13 +243,13 @@ namespace Numberama
         {
             clicked.SetSelected(true);
 
-            if (_moveInfo.first == null)
+            if (_currentMove.first == null)
             {
-                _moveInfo.first = clicked;
+                _currentMove.first = clicked;
             }
-            else if (_moveInfo.second == null && clicked != _moveInfo.first)
+            else if (_currentMove.second == null && clicked != _currentMove.first)
             {
-                _moveInfo.second = clicked;
+                _currentMove.second = clicked;
                 ExecuteMove();
             }
         }
@@ -210,15 +262,18 @@ namespace Numberama
         {
             _grid.PushRange(_grid.GetRemainingNumbers());
             CheckGameOverConditions();
+            Save();
         }
 
         [Button]
         [ShowIf("@ UnityEngine.Application.isPlaying")]
-        public void AskForTip()
+        public void AskForHint()
         {
-            if (_grid.GetNextAvailableMove(out MoveInfo move))
+            ResetHint();
+
+            if (_grid.GetNextAvailableMove(out _currentHint))
             {
-                move.Highlight();
+                _currentHint.Highlight(true);
             }
         }
 

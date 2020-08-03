@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tools.Persistence;
 using UnityEngine;
 using UnityEngine.UI;
 using static Numberama.GameplayManager;
 
 namespace Numberama
 {
-    public class Grid : MonoBehaviour, ISavable
+    public class Grid : MonoBehaviour, IPersistable
     {
         [SerializeField]
         private Vector2Int _size = new Vector2Int(10, 10);
@@ -348,38 +349,29 @@ namespace Numberama
 
         #region Save
 
-        public SaveData Save()
+        public void Save(GameDataWriter writer)
         {
-            GridSaveData data = new GridSaveData(Size);
+            // Write current cell count
+            writer.Write(_lastCellIndex);
 
-            for (int i = 0; i < Size; i++)
+            // Write all cells
+            for (int i = 0; i < _lastCellIndex; i++)
             {
-                if (_cells[i] == null)
-                {
-                    break;
-                }
-
-                data.SetCell(i, _cells[i].State);
+                _cells[i].Save(writer);
             }
-
-            return data;
         }
 
-        public void Restore(SaveData data)
+        public void Load(GameDataReader reader)
         {
-            // Is save data valid ?
-            if (!(data is GridSaveData gridData) || gridData.Cells.Length != Size)
-            {
-                Debug.LogError($"[{name}] Invalid or incompatible save data");
-                return;
-            }
-
             Clear();
 
-            for (int i = 0; i < Size; i++)
+            _lastCellIndex = reader.ReadInt();
+
+            for (int i = 0; i < _lastCellIndex; i++)
             {
-                _cells[i] = Push(gridData.Cells[i]);
-                _lastCellIndex++;
+                GridCell cell = Push(new GridCell.CellState());
+                cell.Load(reader);
+                _cells[i] = cell;
             }
         }
 

@@ -21,7 +21,11 @@ namespace Numberama
         {
             _runtimeReference.SetValue(this);
 
-            InitializePlayerPrefs();
+            if (IsFirstLoad())
+            {
+                InitializePlayerPrefs();
+            }
+
             NavigateToMainMenu();
         }
 
@@ -40,9 +44,31 @@ namespace Numberama
             StartCoroutine(_navigationManager.FastLoad(_gameScene));
         }
 
+        #region Player Prefs
+
         private void InitializePlayerPrefs()
         {
+            PlayerPrefs.SetInt(PlayerPrefKeys.FirstLoad, 1);
             PlayerPrefs.SetInt(PlayerPrefKeys.HasPlayedTutorial, 0);
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 0);
+            PlayerPrefs.Save();
         }
+
+        private bool IsFirstLoad()
+        {
+            return PlayerPrefs.HasKey(PlayerPrefKeys.FirstLoad);
+        }
+
+        public bool HasGameInProgress()
+        {
+            if (IsFirstLoad())
+            {
+                return false;
+            }
+
+            return PlayerPrefs.GetInt(PlayerPrefKeys.HasGameInProgress) == 1 ? true : false;
+        }
+
+        #endregion Player Prefs
     }
 }

@@ -8,12 +8,12 @@ namespace Numberama
     {
         public void OnClickContinue()
         {
-            Value.Continue();
+            Value.RestartWithSameNumbers();
         }
 
         public void OnClickRestart()
         {
-            Value.Restart();
+            Value.RestartWithNewNumbers();
         }
     }
 }

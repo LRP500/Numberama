@@ -1,15 +1,17 @@
 ﻿using Sirenix.OdinInspector;
 using TMPro;
+using Tools.Persistence;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Numberama
 {
-    public sealed class GridCell : MonoBehaviour, IPointerDownHandler
+    public sealed class GridCell : MonoBehaviour, IPointerDownHandler, IPersistable
     {
         #region State
 
+        [System.Serializable]
         public class CellState
         {
             public Vector2Int coordinates = default;
@@ -69,6 +71,7 @@ namespace Numberama
             _coordinatesDisplay = $"{State.coordinates.x} : {State.coordinates.y}";
 #endif
             _number.text = State.number.ToString();
+            SetChecked(State.isChecked);
         }
 
         public void SetChecked(bool value)
@@ -108,5 +111,27 @@ namespace Numberama
         }
 
         #endregion Event Handlers
+
+        #region Persistence
+
+        public void Save(GameDataWriter writer)
+        {
+            writer.Write(State.number);
+            writer.Write(State.isChecked ? 1 : 0);
+            writer.Write(State.coordinates.x);
+            writer.Write(State.coordinates.y);
+        }
+
+        public void Load(GameDataReader reader)
+        {
+            SetState(new CellState
+            {
+                number = reader.ReadInt(),
+                isChecked = reader.ReadInt() == 1 ? true : false,
+                coordinates = new Vector2Int(reader.ReadInt(), reader.ReadInt())
+            });
+        }
+
+        #endregion Persistence
     }
 }
