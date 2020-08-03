@@ -7,10 +7,16 @@ namespace Numberama
     public class MainMenuController : MonoBehaviour
     {
         [SerializeField]
+        private ColorSchemeSelection _colorSchemePanel = null;
+
+        [SerializeField]
         private Button _newGameButton = null;
 
         [SerializeField]
         private SettingToggle _muteToggle = null;
+
+        [SerializeField]
+        private SettingToggle _colorThemeToggle = null;
 
         [SerializeField]
         private GameMasterVariable _gameMaster = null;
@@ -44,13 +50,27 @@ namespace Numberama
                     _newGameButton.onClick.AddListener(_gameMaster.Value.LaunchGame);
                 }
             }
+
+            _colorThemeToggle.RegisterOnClick(_colorSchemePanel.Open);
         }
 
         private void Update()
         {
+            HandleInput();
+        }
+
+        private void HandleInput()
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                NavigationManager.QuitGame();
+                if (_colorSchemePanel.IsOpen)
+                {
+                    _colorSchemePanel.Close();
+                }
+                else
+                {
+                    NavigationManager.QuitGame();
+                }
             }
         }
 
