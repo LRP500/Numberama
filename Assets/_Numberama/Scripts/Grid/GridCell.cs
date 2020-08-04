@@ -36,17 +36,23 @@ namespace Numberama
         [SerializeField]
         private CanvasGroup _canvasGroup = null;
 
-        public bool Selected { get; private set; } = false;
+        [SerializeField]
+        private ColorSchemeManager _colorSchemeManager = null;
 
         private System.Action<GridCell> _callback = null;
+
+        private ColorScheme _colorScheme = null;
 
         [DisplayAsString]
         [LabelText("Coordinates")]
         public string _coordinatesDisplay = string.Empty;
 
+        public bool Selected { get; private set; } = false;
+
         private void Awake()
         {
             State = new CellState();
+            _colorScheme = _colorSchemeManager.CurrentColorScheme;
         }
 
         public void SetState(CellState state)
@@ -78,7 +84,7 @@ namespace Numberama
         {
             SetSelected(false);
             State.isChecked = value;
-            _canvasGroup.alpha = State.isChecked ? 0.2f : 1;
+            _canvasGroup.alpha = State.isChecked ? 0.1f : 1;
             _canvasGroup.interactable = !State.isChecked;
             _canvasGroup.blocksRaycasts = !State.isChecked;
         }
@@ -86,15 +92,15 @@ namespace Numberama
         public void SetSelected(bool value)
         {
             Selected = value;
-            _number.color = value ? new Color(1, 0.5f, 0) : Color.white;
-            _background.color = value ? new Color(1, 0.5f, 0) : Color.white;
+            _number.color = value ? _colorScheme.Selected : _colorScheme.Secondary;
+            _background.color = value ? _colorScheme.Selected : _colorScheme.Secondary;
         }
 
         public void SetHighlighted(bool value)
         {
             Selected = value;
-            _number.color = value ? Color.yellow : Color.white;
-            _background.color = value ? Color.yellow : Color.white;
+            _number.color = value ? _colorScheme.Highlighted : _colorScheme.Secondary;
+            _background.color = value ? _colorScheme.Highlighted : _colorScheme.Secondary;
         }
 
         public void Clear()

@@ -8,7 +8,7 @@ namespace Numberama
         public enum Mode
         {
             Primary,
-            Seconady
+            Secondary
         }
 
         [SerializeField]
@@ -21,6 +21,21 @@ namespace Numberama
         private ColorSchemeManager _colorSchemeManager = null;
 
         private void Awake()
+        {
+            Refresh();
+        }
+
+        private void Start()
+        {
+            _colorSchemeManager.RegisterOnColorSchemeChanged(Refresh);
+        }
+
+        private void OnDestroy()
+        {
+            _colorSchemeManager.UnregisterOnColorSchemeChanged(Refresh);
+        }
+
+        private void Refresh()
         {
             ColorScheme scheme = _colorSchemeManager.CurrentColorScheme;
             _text.color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;

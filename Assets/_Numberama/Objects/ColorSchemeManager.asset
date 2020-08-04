@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: ColorSchemeManager
   m_EditorClassIdentifier: 
   _colorSchemes:
-  - _name: Default
-    _primary: {r: 0, g: 0, b: 0, a: 1}
-    _secondary: {r: 1, g: 1, b: 1, a: 1}
-  - _name: Inverted
-    _primary: {r: 1, g: 1, b: 1, a: 1}
-    _secondary: {r: 0, g: 0, b: 0, a: 1}
+  - {fileID: 11400000, guid: 34e5e6a0b188757429e83568d5848276, type: 2}
+  - {fileID: 11400000, guid: 836ee0b975ed70d4b807b2f9ca7f02c4, type: 2}
+  - {fileID: 11400000, guid: b9f1c4831c9904846a2a369a83d7e380, type: 2}
+  - {fileID: 11400000, guid: 752b472b26e1d5048a13d9d3f68c8451, type: 2}
+  - {fileID: 11400000, guid: 8f463585edb876e499b61f3ea347d934, type: 2}
+  - {fileID: 11400000, guid: 2eb70b6931d10314589040d1e7c51c93, type: 2}
+  - {fileID: 11400000, guid: 5de454c80aaf01e458309d998dacfe1d, type: 2}
+  - {fileID: 11400000, guid: fd066843665af9345be82200bb3e7774, type: 2}
+  - {fileID: 11400000, guid: 2d471e0207d0e4249bc9b4740bf95b15, type: 2}
+  - {fileID: 11400000, guid: f9c62401f69bdb14a8f404adb5ec20ad, type: 2}
+  - {fileID: 11400000, guid: 8b1c99963b7556c47b7e1da6d423fb50, type: 2}
+  - {fileID: 11400000, guid: b452c4ae516f51e43a1a30295a9e0102, type: 2}
+  _currentColorScheme: {fileID: 11400000, guid: 836ee0b975ed70d4b807b2f9ca7f02c4,
+    type: 2}
