@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _colorSchemePanel: {fileID: 1775155010}
+  _gameTitle: {fileID: 735215001}
   _newGameButton: {fileID: 2969008208155656843}
   _muteToggle: {fileID: 516258988}
   _colorThemeToggle: {fileID: 116433061}
@@ -1953,6 +1954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2070458221}
   - component: {fileID: 2070458222}
+  - component: {fileID: 2070458223}
   m_Layer: 5
   m_Name: GameTitle
   m_TagString: Untagged
@@ -2000,6 +2002,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!111 &2070458223
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070458220}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 4e719222f21280941b2569e87fa861aa, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4e719222f21280941b2569e87fa861aa, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2131009680
 GameObject:
   m_ObjectHideFlags: 0

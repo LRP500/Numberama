@@ -1,4 +1,5 @@
-﻿using Tools.Navigation;
+﻿using TMPro;
+using Tools.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ namespace Numberama
     {
         [SerializeField]
         private ColorSchemeSelection _colorSchemePanel = null;
+
+        [SerializeField]
+        private TextMeshProUGUI _gameTitle = null;
 
         [SerializeField]
         private Button _newGameButton = null;
