@@ -18,6 +18,9 @@ namespace Numberama
         private Image _image = null;
 
         [SerializeField]
+        private bool _overrideTransparency = true;
+
+        [SerializeField]
         private ColorSchemeManager _colorSchemeManager = null;
 
         private void Awake()
@@ -37,8 +40,13 @@ namespace Numberama
 
         private void Refresh()
         {
+            float transparency = _image.color.a;
+
             ColorScheme scheme = _colorSchemeManager.CurrentColorScheme;
-            _image.color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;
+            Color color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;
+            color.a = _overrideTransparency ? color.a : transparency;
+
+            _image.color = color;
         }
     }
 }

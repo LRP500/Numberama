@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tools.Persistence;
 using UnityEngine;
@@ -228,10 +229,11 @@ namespace Numberama
 
         #endregion Private Methods
 
-        public void RestartWithNewNumbers()
+        public bool RestartWithNewNumbers()
         {
             StartNewGame();
             _storage.ClearUndoHistory(_grid);
+            return true;
         }
 
         public void RestartWithSameNumbers()
@@ -241,10 +243,23 @@ namespace Numberama
             _storage.ClearUndoHistory(_grid);
         }
 
-        public void UndoLastMove()
+        public bool UndoLastMove()
         {
-            _storage.Undo(_grid);
-            _storage.Save(_grid);
+            if (_storage.HistorySize > 0)
+            {
+                _storage.Undo(_grid);
+                _storage.Save(_grid);
+                return true;
+            }
+
+            return false;
+        }
+
+        public void GiveUp()
+        {
+            _grid.Clear();
+            Save();
+            _gameMaster.Value?.NavigateToMainMenu();
         }
 
         public void HandleClick(GridCell clicked)
@@ -266,7 +281,7 @@ namespace Numberama
 
         [Button]
         [ShowIf("@ UnityEngine.Application.isPlaying")]
-        public void Check()
+        public bool Check()
         {
             if (!_grid.IsFull())
             {
@@ -274,19 +289,25 @@ namespace Numberama
                 _grid.PushRange(_grid.GetRemainingNumbers());
                 CheckGameOverConditions();
                 Save();
+                return true;
             }
+
+            return false;
         }
 
         [Button]
         [ShowIf("@ UnityEngine.Application.isPlaying")]
-        public void AskForHint()
+        public bool AskForHint()
         {
             ResetHint();
 
             if (_grid.GetNextAvailableMove(out _currentHint))
             {
                 _currentHint.Highlight(true);
+                return true;
             }
+
+            return false;
         }
 
         [Button]

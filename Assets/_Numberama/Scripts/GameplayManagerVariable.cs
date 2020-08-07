@@ -15,5 +15,10 @@ namespace Numberama
         {
             Value.RestartWithNewNumbers();
         }
+
+        public void OnClickGiveUp()
+        {
+            Value?.GiveUp();
+        }
     }
 }

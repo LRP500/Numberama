@@ -33,7 +33,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
+        - m_Target: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
           m_MethodName: OnClickGiveUp
           m_Mode: 1
           m_Arguments:

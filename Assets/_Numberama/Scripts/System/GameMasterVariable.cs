@@ -15,10 +15,5 @@ namespace Numberama
         {
             Value?.LaunchGame();
         }
-
-        public void OnClickGiveUp()
-        {
-            Value?.NavigateToMainMenu();
-        }
     }
 }
