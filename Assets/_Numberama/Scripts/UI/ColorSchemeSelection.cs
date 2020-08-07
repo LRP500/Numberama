@@ -22,6 +22,8 @@ namespace Numberama
 
         private List<ColorSchemeSlot> _slots = null;
 
+        private ColorSchemeSlot _selected = null;
+
         private void Awake()
         {
             Close();
@@ -46,8 +48,28 @@ namespace Numberama
             {
                 ColorSchemeSlot instance = Instantiate(_slotPrefab, _slotContainer);
                 instance.SetScheme(scheme);
+                instance.SetCallback(Select);
+
+                if (scheme == _manager.CurrentColorScheme)
+                {
+                    instance.SetSelected(true);
+                    _selected = instance;
+                }
+                else
+                {
+                    instance.SetSelected(false);
+                }
+
                 _slots.Add(instance);
             }
+        }
+
+        private void Select(ColorSchemeSlot selection)
+        {
+            _manager.SetCurrentColorScheme(selection.Scheme);
+            _selected?.SetSelected(false);
+            _selected = selection;
+            _selected.SetSelected(true);
         }
 
         public void Open()
