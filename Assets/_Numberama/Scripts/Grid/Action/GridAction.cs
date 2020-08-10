@@ -11,6 +11,7 @@ namespace Numberama
 
         [SerializeField]
         private GridActionInfo _gridActionInfo = null;
+        public GridActionInfo Info => _gridActionInfo;
 
         [SerializeField]
         private Image _image = null;

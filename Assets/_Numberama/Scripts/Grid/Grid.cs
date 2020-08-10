@@ -137,6 +137,11 @@ namespace Numberama
             return _cells[CoordToIndex(x, y)];
         }
 
+        public GridCell GetCell(Vector2Int coordinates)
+        {
+            return _cells[CoordToIndex(coordinates.x, coordinates.y)];
+        }
+
         public bool IsLinked(GridCell a, GridCell b)
         {
             return CheckHorizontalLink(a, b) || CheckVerticalLink(a, b);

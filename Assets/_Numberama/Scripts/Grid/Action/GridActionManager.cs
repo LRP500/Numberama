@@ -31,5 +31,27 @@ namespace Numberama
         {
             _undoAction.SetStackValue(_gameplayManager.UndoStackSize);
         }
+
+        public GridAction GetAction(GridActionInfo action)
+        {
+            if (_checkAction.Info == action)
+            {
+                return _checkAction;
+            }
+            else if (_tipAction.Info == action)
+            {
+                return _tipAction;
+            }
+            else if (_restartAction.Info == action)
+            {
+                return _restartAction;
+            }
+            else if (_undoAction.Info == action)
+            {
+                return _undoAction;
+            }
+
+            return null;
+        }
     }
 }

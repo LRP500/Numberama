@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tools.Persistence;
 using UnityEngine;
@@ -135,7 +134,7 @@ namespace Numberama
 
         #region Private Methods
 
-        private void StartNewGame()
+        protected virtual void StartNewGame()
         {
             // Clear
             _grid.Clear();
