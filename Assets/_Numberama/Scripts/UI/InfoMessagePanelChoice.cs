@@ -23,8 +23,8 @@ namespace Numberama
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _data.callback?.Invoke();
             _infoMessagePanel.Close();
+            _data.callback?.Invoke();
         }
     }
 }

@@ -77,6 +77,11 @@ namespace Numberama
                 Close();
             }
 
+            if (data == null)
+            {
+                return;
+            }
+
             Initialize(data);
             StartCoroutine(RefreshLayoutAndOpen());
         }

@@ -6,7 +6,7 @@ namespace Numberama.Tutorial
     public class TutorialGameplayManager : GameplayManager
     {
         [SerializeField]
-        private Tutorial _tutorial = null;
+        private TutorialManager _tutorial = null;
 
         protected override void StartNewGame()
         {

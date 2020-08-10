@@ -1,11 +1,10 @@
 ﻿using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Numberama.Tutorial
 {
-    public class Tutorial : MonoBehaviour
+    public class TutorialManager : MonoBehaviour
     {
         [SerializeField]
         private List<TutorialStep> _steps = null;
@@ -17,12 +16,28 @@ namespace Numberama.Tutorial
         private int _maskBorderThickness = 4;
 
         [SerializeField]
+        private InfoMessagePanel _infoMessagePanel = null;
+
+        [SerializeField]
         private Grid _grid = null;
 
         [SerializeField]
         private GridActionManager _gridActionManager = null;
 
+        [SerializeField]
+        private TutorialManagerVariable _runtimeReference = null;
+
         private int _currentStep = 0;
+
+        private void Awake()
+        {
+            _runtimeReference.SetValue(this);
+        }
+
+        private void OnDestroy()
+        {
+            _runtimeReference.Clear();
+        }
 
         public void Play()
         {
@@ -39,7 +54,7 @@ namespace Numberama.Tutorial
 
         [Button]
         [ShowIf("@ UnityEngine.Application.isPlaying")]
-        private void NextStep()
+        public void NextStep()
         {
             _currentStep++;
 
@@ -52,6 +67,8 @@ namespace Numberama.Tutorial
         private void InitializeStep(TutorialStep step)
         {
             Clear();
+
+            _infoMessagePanel.Open(step.InfoMessage);
 
             switch (step.Highlight)
             {

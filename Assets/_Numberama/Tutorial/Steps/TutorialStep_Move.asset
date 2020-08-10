@@ -16,4 +16,33 @@ MonoBehaviour:
   _firstCell: {x: 2, y: 0}
   _secondCell: {x: 2, y: 1}
   _action: {fileID: 0}
-  _infoMessage: {fileID: 0}
+  _infoMessage: {fileID: 7794225390505158869}
+--- !u!114 &7794225390505158869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46563de6303164987fb1f38bc541e0, type: 3}
+  m_Name: InfoMessage
+  m_EditorClassIdentifier: 
+  _message: Move tutorial
+  _choices:
+  - _text: Next
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 5ceade0109a8b3240bc49cbee4e872d4, type: 2}
+          m_MethodName: OnClickNext
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
