@@ -1,6 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 namespace Tools
 {
     public static class ScriptableObjectExtensions
@@ -30,3 +32,5 @@ namespace Tools
         }
     }
 }
+
+#endif

@@ -8,7 +8,7 @@ namespace Numberama
     {
         public void OnClickLaunchTutorial()
         {
-            Value?.LaunchGame();
+            Value?.LaunchTutorial();
         }
 
         public void OnClickLaunchGame()

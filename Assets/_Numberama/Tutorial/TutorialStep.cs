@@ -40,6 +40,8 @@ namespace Numberama
         private InfoMessage _infoMessage = null;
         public InfoMessage InfoMessage => _infoMessage;
 
+#if UNITY_EDITOR
+
         [Button]
         [ShowIf("@ _infoMessage == null")]
         private void AddInfoMessage()
@@ -53,5 +55,7 @@ namespace Numberama
         {
             this.RemoveSubAsset(_infoMessage);
         }
+
+#endif
     }
 }

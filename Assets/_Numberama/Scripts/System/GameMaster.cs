@@ -15,6 +15,9 @@ namespace Numberama
         private SceneReference _gameScene = null;
 
         [SerializeField]
+        private SceneReference _tutorialScene = null;
+
+        [SerializeField]
         private GameMasterVariable _runtimeReference = null;
 
         private void Awake()
@@ -44,6 +47,11 @@ namespace Numberama
             StartCoroutine(_navigationManager.FastLoad(_gameScene));
         }
 
+        public void LaunchTutorial()
+        {
+            StartCoroutine(_navigationManager.FastLoad(_tutorialScene));
+        }
+
         #region Player Prefs
 
         private void InitializePlayerPrefs()
@@ -56,6 +64,9 @@ namespace Numberama
 
         private bool IsFirstLoad()
         {
+#if UNITY_EDITOR
+            return true;
+#endif
             return PlayerPrefs.HasKey(PlayerPrefKeys.FirstLoad);
         }
 

@@ -342,4 +342,5 @@ MonoBehaviour:
   _navigationManager: {fileID: 11400000, guid: 512d9ac15631a714f8b397443e2613ef, type: 2}
   _mainMenuScene: {fileID: 11400000, guid: 4fd65478d93f09b4dab09cf58c416de0, type: 2}
   _gameScene: {fileID: 11400000, guid: 7403fab2d888bb54ca7b837b1ee301bf, type: 2}
+  _tutorialScene: {fileID: 11400000, guid: 29a0765daa83f3647b12eaec4ea3a4fc, type: 2}
   _runtimeReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
