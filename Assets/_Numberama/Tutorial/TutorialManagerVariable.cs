@@ -10,5 +10,10 @@ namespace Numberama.Tutorial
         {
             Value.NextStep();
         }
+
+        public void OnClickPrevious()
+        {
+            Value.PreviousStep();
+        }
     }
 }

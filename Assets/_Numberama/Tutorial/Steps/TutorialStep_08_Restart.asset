@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a19b83bab54c04092f220787f6f762, type: 3}
+  m_Name: TutorialStep_08_Restart
+  m_EditorClassIdentifier: 
+  _highlight: 3
+  _firstCell: {x: 0, y: 0}
+  _secondCell: {x: 0, y: 0}
+  _action: {fileID: 11400000, guid: cf4b3ab8c6cf81b4ca0c2ba263a774e7, type: 2}
+  _infoMessage: {fileID: 6352595298368229771}
+--- !u!114 &6352595298368229771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46563de6303164987fb1f38bc541e0, type: 3}
+  m_Name: InfoMessage
+  m_EditorClassIdentifier: 
+  _message: Finally, you can restart by pressing this button.
+  _choices:
+  - _text: Previous
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 5ceade0109a8b3240bc49cbee4e872d4, type: 2}
+          m_MethodName: OnClickPrevious
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _text: End Tutorial
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
+          m_MethodName: OnClickGiveUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

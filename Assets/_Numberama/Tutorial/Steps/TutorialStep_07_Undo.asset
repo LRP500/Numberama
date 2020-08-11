@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4a19b83bab54c04092f220787f6f762, type: 3}
-  m_Name: TutorialStep_Move
+  m_Name: TutorialStep_07_Undo
   m_EditorClassIdentifier: 
-  _highlight: 2
-  _firstCell: {x: 2, y: 0}
-  _secondCell: {x: 2, y: 1}
-  _action: {fileID: 0}
-  _infoMessage: {fileID: 7794225390505158869}
---- !u!114 &7794225390505158869
+  _highlight: 3
+  _firstCell: {x: 0, y: 0}
+  _secondCell: {x: 0, y: 0}
+  _action: {fileID: 11400000, guid: 3e3fea766750ca64aa591c482fcadc9a, type: 2}
+  _infoMessage: {fileID: 2180118013716290663}
+--- !u!114 &2180118013716290663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,8 +29,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c46563de6303164987fb1f38bc541e0, type: 3}
   m_Name: InfoMessage
   m_EditorClassIdentifier: 
-  _message: Move tutorial
+  _message: You can undo your previous moves by pressing this button.
   _choices:
+  - _text: Previous
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 5ceade0109a8b3240bc49cbee4e872d4, type: 2}
+          m_MethodName: OnClickPrevious
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - _text: Next
     callback:
       m_PersistentCalls:

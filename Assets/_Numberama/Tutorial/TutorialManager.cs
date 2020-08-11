@@ -56,10 +56,20 @@ namespace Numberama.Tutorial
         [ShowIf("@ UnityEngine.Application.isPlaying")]
         public void NextStep()
         {
-            _currentStep++;
-
-            if (_currentStep < _steps.Count)
+            if (_currentStep + 1 < _steps.Count)
             {
+                _currentStep++;
+                InitializeStep(_steps[_currentStep]);
+            }
+        }
+
+        [Button]
+        [ShowIf("@ UnityEngine.Application.isPlaying")]
+        public void PreviousStep()
+        {
+            if (_currentStep - 1 >=  0)
+            {
+                _currentStep--;
                 InitializeStep(_steps[_currentStep]);
             }
         }

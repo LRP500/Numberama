@@ -11,7 +11,7 @@ namespace Tools
         {
             // Create sub asset
             T child = ScriptableObject.CreateInstance<T>();
-            child.name = child.GetType().Name.ToString();
+            child.name = typeof(T).Name;
 
             // Add sub asset to parent
             AssetDatabase.AddObjectToAsset(child, so);

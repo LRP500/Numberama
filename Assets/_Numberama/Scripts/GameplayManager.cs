@@ -51,10 +51,10 @@ namespace Numberama
         #region Serialized Fields
 
         [SerializeField]
-        private Grid _grid = null;
+        protected Grid _grid = null;
 
         [SerializeField]
-        private int _initialPush = 20;
+        protected int _initialPush = 20;
 
         [SerializeField]
         private PersistentStorage _storage = null;
@@ -90,7 +90,7 @@ namespace Numberama
         private MoveInfo _currentMove = default;
         private MoveInfo _currentHint = default;
 
-        private List<int> _lastStartingNumbers = null;
+        protected List<int> _lastStartingNumbers = null;
 
         #endregion Private Fields
 
@@ -146,7 +146,7 @@ namespace Numberama
             Save();
         }
 
-        private void Save()
+        protected void Save()
         {
             _storage.Save(_grid);
             PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, _grid.IsEmpty ? 0 : 1);

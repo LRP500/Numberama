@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Numberama.Tutorial
@@ -8,9 +9,16 @@ namespace Numberama.Tutorial
         [SerializeField]
         private TutorialManager _tutorial = null;
 
+        [SerializeField]
+        private List<int> _initialNumbers = null;
+
         protected override void StartNewGame()
         {
-            base.StartNewGame();
+            _grid.Clear();
+            _grid.PushRange(_initialNumbers);
+            _lastStartingNumbers = _initialNumbers;
+
+            Save();
 
             StartCoroutine(StartTutorial());
         }

@@ -246,9 +246,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _steps:
-  - {fileID: 11400000, guid: 74ebe3a6e32cddf44a6cff2afe271746, type: 2}
-  - {fileID: 11400000, guid: 60fa46a959f35314e9380f8fb40d9348, type: 2}
-  - {fileID: 11400000, guid: 631869706ab9e054ea4b23305310980e, type: 2}
+  - {fileID: 11400000, guid: 326695e3115112a488638d20cd1c7b7e, type: 2}
+  - {fileID: 11400000, guid: 1346b2c1ca1382248994d9f3bce7e80c, type: 2}
+  - {fileID: 11400000, guid: ea735d6e4dc903e41b12a4c1ea55ffc4, type: 2}
+  - {fileID: 11400000, guid: 95a673cd62785f4439034658f4a99556, type: 2}
+  - {fileID: 11400000, guid: e60f46b92b349d24f8e0f5c73c82ae22, type: 2}
+  - {fileID: 11400000, guid: c28bf36984e0216429ff536ef553de81, type: 2}
+  - {fileID: 11400000, guid: 3141ccacbe16b6d41b635514d4166001, type: 2}
+  - {fileID: 11400000, guid: b26b4731e37af744f9022d7396b5c72d, type: 2}
   _masks:
   - {fileID: 418355094}
   - {fileID: 1378630487}
@@ -1025,6 +1030,7 @@ MonoBehaviour:
     type: 2}
   _victoryMessage: {fileID: 11400000, guid: f214e5592d1b4874cb8a0782e1be3799, type: 2}
   _tutorial: {fileID: 295769297}
+  _initialNumbers: 0800000002000000070000000600000009000000040000000100000005000000060000000600000003000000050000000700000009000000090000000100000001000000050000000700000009000000
 --- !u!1 &2117817640
 GameObject:
   m_ObjectHideFlags: 0
