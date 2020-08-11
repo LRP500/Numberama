@@ -12,5 +12,6 @@ namespace Numberama
         [Range(1, 9)]
         [SerializeField]
         private int _numbers = 9;
+        public int Numbers => _numbers;
     }
 }

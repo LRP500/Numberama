@@ -66,14 +66,14 @@ namespace Numberama
             Initialize();
         }
 
-        public List<int> PushRange(int count)
+        public List<int> PushRange(int count, int numberMax)
         {
             List<int> pushed = new List<int>();
 
             int length = Mathf.Min(_lastCellIndex + count, Size);
             for (; _lastCellIndex < length; _lastCellIndex++)
             {
-                GridCell cell = Push(Random.Range(1, 10));
+                GridCell cell = Push(Random.Range(1, numberMax + 1));
                 _cells[_lastCellIndex] = cell;
                 pushed.Add(cell.Number);
             }

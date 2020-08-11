@@ -11,9 +11,9 @@ namespace Numberama
             Value?.LaunchTutorial();
         }
 
-        public void OnClickLaunchGame()
+        public void OnClickLaunchGame(Difficulty difficulty)
         {
-            Value?.LaunchGame();
+            Value?.LaunchGame(difficulty);
         }
     }
 }

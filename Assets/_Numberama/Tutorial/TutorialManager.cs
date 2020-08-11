@@ -41,6 +41,7 @@ namespace Numberama.Tutorial
 
         public void Play()
         {
+            _currentStep = 0;
             InitializeStep(_steps[_currentStep]);
         }
 

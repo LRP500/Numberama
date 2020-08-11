@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e620d2b9a3caff4e9bfdf6a9cb278b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundtrack: {fileID: 8300000, guid: 0d3d1b761cfd7614e9d36c20c816fb81, type: 3}
+  _soundtrack: {fileID: 0}
   _soundtrackSource: {fileID: 71876549}
   _runtimeReference: {fileID: 11400000, guid: a94b91a435a0f0242a9be0f4501d330d, type: 2}
 --- !u!1 &1398708299
@@ -339,8 +339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11a74bf85b5c504b90589db79677596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playTutorial: 1
   _navigationManager: {fileID: 11400000, guid: 512d9ac15631a714f8b397443e2613ef, type: 2}
   _mainMenuScene: {fileID: 11400000, guid: 4fd65478d93f09b4dab09cf58c416de0, type: 2}
   _gameScene: {fileID: 11400000, guid: 7403fab2d888bb54ca7b837b1ee301bf, type: 2}
   _tutorialScene: {fileID: 11400000, guid: 29a0765daa83f3647b12eaec4ea3a4fc, type: 2}
+  _gameplayManager: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
   _runtimeReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}

@@ -168,9 +168,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62235115}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &62235118
 MonoBehaviour:
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600bb3ad1c902cf48933707e5dd77539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
+  _canvasGroup: {fileID: 62235117}
 --- !u!1 &82164461
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +542,43 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925,
+        type: 2}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLaunchGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Numberama.Difficulty, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: d193bb7662cc10141b3198d75659b0ec,
+        type: 2}
     - target: {fileID: 7405729235140084027, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_Name
@@ -599,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _colorSchemePanel: {fileID: 1775155010}
+  _difficultyPanel: {fileID: 62235118}
   _gameTitle: {fileID: 735215001}
   _newGameButton: {fileID: 2969008208155656843}
   _muteToggle: {fileID: 516258988}
@@ -1030,6 +1068,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925,
+        type: 2}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLaunchTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7405729235140084027, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
@@ -1874,6 +1943,43 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925,
+        type: 2}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLaunchGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Numberama.Difficulty, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d2cfa34034840e42acdd14e3f64a031,
+        type: 2}
     - target: {fileID: 7405729235140084027, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_Name
@@ -2368,6 +2474,43 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925,
+        type: 2}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickLaunchGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Numberama.Difficulty, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059407079200890853, guid: fbc13dd42ac37c34bab822465ed4c5a4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: b20e31134c54ded4ca21f634292ce444,
+        type: 2}
     - target: {fileID: 7405729235140084027, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_Name
@@ -2454,7 +2597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e54d44550b6d242b81b337517413a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 1775155009}
   _canvasGroup: {fileID: 1775155009}
   _manager: {fileID: 11400000, guid: 281f8e5c6df56f44fb417be0719135a7, type: 2}
   _slotPrefab: {fileID: 1291189035997085923, guid: 22951b5a9579dc64a9144ecf7c9f87ad,

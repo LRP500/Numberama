@@ -12,13 +12,15 @@ namespace Numberama.Tutorial
         [SerializeField]
         private List<int> _initialNumbers = null;
 
+        protected override void Start()
+        {
+            StartNewGame();
+        }
+
         protected override void StartNewGame()
         {
             _grid.Clear();
             _grid.PushRange(_initialNumbers);
-            _lastStartingNumbers = _initialNumbers;
-
-            Save();
 
             StartCoroutine(StartTutorial());
         }

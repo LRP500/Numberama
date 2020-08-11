@@ -24,8 +24,11 @@ namespace Numberama
 
         private void Start()
         {
-            _soundtrackSource.clip = _soundtrack;
-            _soundtrackSource.Play();
+            if (_soundtrack)
+            {
+                _soundtrackSource.clip = _soundtrack;
+                _soundtrackSource.Play();
+            }
         }
 
         private void OnDestroy()

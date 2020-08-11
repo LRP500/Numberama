@@ -6,9 +6,6 @@ namespace Numberama
     public class ColorSchemeSelection : MenuPanel
     {
         [SerializeField]
-        private CanvasGroup _canvasGroup = null;
-
-        [SerializeField]
         private ColorSchemeManager _manager = null;
 
         [SerializeField]

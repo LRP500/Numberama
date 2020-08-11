@@ -21,9 +21,11 @@ namespace Tools.Navigation
             }
         }
 
-        public IEnumerator FastLoad(SceneReference scene)
+        public IEnumerator FastLoad(SceneReference scene, System.Action callback = null)
         {
             yield return LoadAdditive(scene);
+
+            callback?.Invoke();
 
             yield return UnloadAll(new List<Scene>
             {

@@ -6,6 +6,9 @@ namespace Numberama
     public class GameMaster : MonoBehaviour
     {
         [SerializeField]
+        private bool _playTutorial = false;
+
+        [SerializeField]
         private NavigationManager _navigationManager = null;
 
         [SerializeField]
@@ -16,6 +19,9 @@ namespace Numberama
 
         [SerializeField]
         private SceneReference _tutorialScene = null;
+
+        [SerializeField]
+        private GameplayManagerVariable _gameplayManager = null;
 
         [SerializeField]
         private GameMasterVariable _runtimeReference = null;
@@ -42,9 +48,12 @@ namespace Numberama
             StartCoroutine(_navigationManager.FastLoad(_mainMenuScene));
         }
 
-        public void LaunchGame()
+        public void LaunchGame(Difficulty difficulty)
         {
-            StartCoroutine(_navigationManager.FastLoad(_gameScene));
+            StartCoroutine(_navigationManager.FastLoad(_gameScene, () =>
+            {
+                _gameplayManager.Value.SetDifficulty(difficulty);
+            }));
         }
 
         public void LaunchTutorial()
@@ -65,7 +74,7 @@ namespace Numberama
         private bool IsFirstLoad()
         {
 #if UNITY_EDITOR
-            return true;
+            return _playTutorial;
 #endif
             return PlayerPrefs.HasKey(PlayerPrefKeys.FirstLoad);
         }

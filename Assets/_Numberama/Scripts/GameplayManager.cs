@@ -92,6 +92,8 @@ namespace Numberama
 
         protected List<int> _lastStartingNumbers = null;
 
+        private Difficulty _difficulty = null;
+
         #endregion Private Fields
 
         #region MonoBehaviour
@@ -101,18 +103,16 @@ namespace Numberama
             _runtimeReference.SetValue(this);
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             if (_gameMaster.Value == null ||
                 !_gameMaster.Value.HasGameInProgress() ||
                 !_storage.SaveFileExists)
             {
-                Debug.Log("Starting new game");
                 StartNewGame();
             }
             else
             {
-                Debug.Log("Loading existing game");
                 _storage.Load(_grid);
             }
         }
@@ -140,7 +140,7 @@ namespace Numberama
             _grid.Clear();
 
             // Initialize
-            _lastStartingNumbers = _grid.PushRange(_initialPush);
+            _lastStartingNumbers = _grid.PushRange(_initialPush, _difficulty.Numbers);
 
             // Save
             Save();
@@ -274,6 +274,11 @@ namespace Numberama
                 _currentMove.second = clicked;
                 ExecuteMove();
             }
+        }
+
+        public void SetDifficulty(Difficulty difficulty)
+        {
+            _difficulty = difficulty;
         }
 
         #region Editor
