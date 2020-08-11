@@ -23,17 +23,17 @@ PrefabInstance:
     - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_fontSize
-      value: 42
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 42
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 852293133610095169, guid: fbc13dd42ac37c34bab822465ed4c5a4,
         type: 3}
