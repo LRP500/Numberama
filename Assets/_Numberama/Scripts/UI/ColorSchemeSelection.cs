@@ -1,10 +1,9 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Numberama
 {
-    public class ColorSchemeSelection : MonoBehaviour
+    public class ColorSchemeSelection : MenuPanel
     {
         [SerializeField]
         private CanvasGroup _canvasGroup = null;
@@ -17,8 +16,6 @@ namespace Numberama
 
         [SerializeField]
         private Transform _slotContainer = null;
-
-        public bool IsOpen { get; private set; } = false;
 
         private List<ColorSchemeSlot> _slots = null;
 
@@ -70,34 +67,6 @@ namespace Numberama
             _selected?.SetSelected(false);
             _selected = selection;
             _selected.SetSelected(true);
-        }
-
-        public void Open()
-        {
-            Show();
-            IsOpen = true;
-        }
-
-        public void Close()
-        {
-            Hide();
-            IsOpen = false;
-        }
-
-        [Button]
-        private void Show()
-        {
-            _canvasGroup.alpha = 1;
-            _canvasGroup.interactable = true;
-            _canvasGroup.blocksRaycasts = true;
-        }
-
-        [Button]
-        private void Hide()
-        {
-            _canvasGroup.alpha = 0;
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
         }
     }
 }
