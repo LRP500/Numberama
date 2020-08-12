@@ -14,9 +14,6 @@ namespace Numberama
         private DifficultySelection _difficultyPanel = null;
 
         [SerializeField]
-        private TextMeshProUGUI _gameTitle = null;
-
-        [SerializeField]
         private Button _newGameButton = null;
 
         [SerializeField]
