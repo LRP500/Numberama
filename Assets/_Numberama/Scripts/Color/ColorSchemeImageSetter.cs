@@ -37,11 +37,9 @@ namespace Numberama
         private void Refresh()
         {
             float transparency = _image.color.a;
-
             ColorScheme scheme = _colorSchemeManager.CurrentColorScheme;
             Color color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;
             color.a = _overrideTransparency ? color.a : transparency;
-
             _image.color = color;
         }
     }

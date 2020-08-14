@@ -18,6 +18,9 @@ namespace Numberama
         private TextMeshProUGUI _text = null;
 
         [SerializeField]
+        private bool _overrideTransparency = true;
+
+        [SerializeField]
         private ColorSchemeManager _colorSchemeManager = null;
 
         private void Start()
@@ -33,8 +36,11 @@ namespace Numberama
 
         private void Refresh()
         {
+            float transparency = _text.color.a;
             ColorScheme scheme = _colorSchemeManager.CurrentColorScheme;
-            _text.color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;
+            Color color = _mode == Mode.Primary ? scheme.Primary : scheme.Secondary;
+            color.a = _overrideTransparency ? color.a : transparency;
+            _text.color = color;
         }
     }
 }
