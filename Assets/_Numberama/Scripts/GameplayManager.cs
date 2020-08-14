@@ -60,6 +60,9 @@ namespace Numberama
         private PersistentStorage _storage = null;
 
         [SerializeField]
+        private Difficulty _difficulty = null;
+
+        [SerializeField]
         private GameMasterVariable _gameMaster = null;
 
         [SerializeField]
@@ -91,8 +94,6 @@ namespace Numberama
         private MoveInfo _currentHint = default;
 
         protected List<int> _lastStartingNumbers = null;
-
-        private Difficulty _difficulty = null;
 
         #endregion Private Fields
 

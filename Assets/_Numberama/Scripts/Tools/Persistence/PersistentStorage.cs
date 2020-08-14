@@ -6,7 +6,7 @@ namespace Tools.Persistence
 {
     public class PersistentStorage : MonoBehaviour
     {
-        private string _savePath = string.Empty;
+        protected string _savePath = string.Empty;
 
         private Stack<string> _history = null;
 
@@ -15,8 +15,13 @@ namespace Tools.Persistence
 
         private void Awake()
         {
-            _savePath = Path.Combine(Application.persistentDataPath, "save");
             _history = new Stack<string>();
+            SetSavePath();
+        }
+
+        protected virtual void SetSavePath()
+        {
+            _savePath = Path.Combine(Application.persistentDataPath, "save");
         }
 
         public void Save(IPersistable persistable)

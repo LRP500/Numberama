@@ -22,6 +22,15 @@ namespace Numberama
         {
             Close();
             Initialize();
+            LoadScheme();
+        }
+
+        private void LoadScheme()
+        {
+            if (PlayerPrefs.HasKey(PlayerPrefKeys.ColorScheme))
+            {
+                _manager.SetCurrentColorScheme(PlayerPrefs.GetString(PlayerPrefKeys.ColorScheme));
+            }
         }
 
         private void OnDestroy()
