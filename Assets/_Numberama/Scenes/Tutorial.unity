@@ -1023,6 +1023,7 @@ MonoBehaviour:
   _grid: {fileID: 1273181310}
   _initialPush: 20
   _storage: {fileID: 1932479304}
+  _difficulty: {fileID: 0}
   _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
   _runtimeReference: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
   _infoMessagePanel: {fileID: 0}

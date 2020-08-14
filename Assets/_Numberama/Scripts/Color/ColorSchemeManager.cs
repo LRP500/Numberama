@@ -21,7 +21,27 @@ namespace Numberama
         public void SetCurrentColorScheme(ColorScheme scheme)
         {
             _currentColorScheme = scheme;
+            PlayerPrefs.SetString(PlayerPrefKeys.ColorScheme, scheme.Name);
             OnColorSchemeChanged?.Invoke();
+        }
+
+        public void SetCurrentColorScheme(string schemeName)
+        {
+            foreach (ColorScheme scheme in _colorSchemes)
+            {
+                if (scheme.Name == schemeName)
+                {
+                    SetCurrentColorScheme(scheme);
+                    return;
+                }
+            }
+
+            SetDefaultScheme();
+        }
+
+        public void SetDefaultScheme()
+        {
+            SetCurrentColorScheme(_colorSchemes[0]);
         }
 
         public void SetRandom()

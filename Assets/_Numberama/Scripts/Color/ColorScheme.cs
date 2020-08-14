@@ -7,6 +7,10 @@ namespace Numberama
     public class ColorScheme : ScriptableObject
     {
         [SerializeField]
+        private string _name = string.Empty;
+        public string Name => _name;
+
+        [SerializeField]
         private Color _primary = Color.black;
         public Color Primary => _primary;
 

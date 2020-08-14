@@ -1,5 +1,4 @@
-﻿using TMPro;
-using Tools.Navigation;
+﻿using Tools.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 

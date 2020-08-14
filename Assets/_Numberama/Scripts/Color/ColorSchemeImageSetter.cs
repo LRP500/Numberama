@@ -23,13 +23,9 @@ namespace Numberama
         [SerializeField]
         private ColorSchemeManager _colorSchemeManager = null;
 
-        private void Awake()
-        {
-            Refresh();
-        }
-
         private void Start()
         {
+            Refresh();
             _colorSchemeManager.RegisterOnColorSchemeChanged(Refresh);
         }
 
