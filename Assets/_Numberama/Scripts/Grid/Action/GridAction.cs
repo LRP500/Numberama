@@ -22,6 +22,7 @@ namespace Numberama
         [SerializeField]
         private Slider _slider = null;
 
+        private float _reloadTime = 0f;
         private float _lastUseTime = 0f;
 
         private GridActionCallback OnExecute = null;
@@ -29,16 +30,21 @@ namespace Numberama
         private void Awake()
         {
             _image.sprite = _gridActionInfo.Icon;
-
+            _reloadTime = _gridActionInfo.ReloadTime;
             _slider.minValue = 0;
-            _slider.maxValue = _gridActionInfo.ReloadTime;
-
+            _slider.maxValue = _reloadTime;
             _lastUseTime = float.MinValue;
         }
 
         public void SetStackValue(int value)
         {
             _stack.text = value.ToString();
+        }
+
+        public void SetPurchased(bool purchased)
+        {
+            _reloadTime = purchased ? 0 : _gridActionInfo.ReloadTime;
+            _slider.maxValue = _reloadTime;
         }
 
         private void Update()
@@ -49,13 +55,7 @@ namespace Numberama
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (CanUse() && OnExecute?.Invoke() == true)
-            {
-#if DEVELOPMENT_BUILD || UNITY_EDITOR
-                return;
-#endif
-                _lastUseTime = Time.time;
-            }
+            _lastUseTime = Time.time;
         }
 
         public void RegisterOnExecute(GridActionCallback action)

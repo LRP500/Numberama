@@ -19,6 +19,13 @@ namespace Numberama
         [SerializeField]
         private TextMeshProUGUI _description = null;
 
+        private bool _purchased = false;
+
+        public void SetPurchased(bool purchased)
+        {
+            _purchased = purchased;
+        }
+
         [SerializeField]
         private TextMeshProUGUI _price = null;
 

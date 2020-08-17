@@ -8,7 +8,7 @@ namespace Numberama
         private GridAction _checkAction = null;
 
         [SerializeField]
-        private GridAction _tipAction = null;
+        private GridAction _hintAction = null;
 
         [SerializeField]
         private GridAction _restartAction = null;
@@ -19,12 +19,23 @@ namespace Numberama
         [SerializeField]
         private GameplayManager _gameplayManager = null;
 
+        [SerializeField]
+        private GameMasterVariable _gameMaster = null;
+
         private void Start()
         {
             _checkAction.RegisterOnExecute(_gameplayManager.Check);
-            _tipAction.RegisterOnExecute(_gameplayManager.AskForHint);
             _restartAction.RegisterOnExecute(_gameplayManager.RestartWithNewNumbers);
+            _hintAction.RegisterOnExecute(_gameplayManager.AskForHint);
             _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove);
+
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+            _hintAction.SetPurchased(true);
+            _undoAction.SetPurchased(true);
+#else
+            _hintAction.SetPurchased(_gameMaster.Value.Store.IsHintBoosterPurchased());
+            _undoAction.SetPurchased(_gameMaster.Value.Store.IsUndoBoosterPurchased());
+#endif
         }
 
         private void Update()
@@ -38,9 +49,9 @@ namespace Numberama
             {
                 return _checkAction;
             }
-            else if (_tipAction.Info == action)
+            else if (_hintAction.Info == action)
             {
-                return _tipAction;
+                return _hintAction;
             }
             else if (_restartAction.Info == action)
             {

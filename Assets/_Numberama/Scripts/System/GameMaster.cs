@@ -21,6 +21,10 @@ namespace Numberama
         private SceneReference _tutorialScene = null;
 
         [SerializeField]
+        private NumberamaStore _store = null;
+        public NumberamaStore Store => _store;
+
+        [SerializeField]
         private GameplayManagerVariable _gameplayManager = null;
 
         [SerializeField]
