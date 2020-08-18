@@ -839,6 +839,7 @@ MonoBehaviour:
   _initialPush: 20
   _storage: {fileID: 1465355322}
   _difficulty: {fileID: 11400000, guid: d193bb7662cc10141b3198d75659b0ec, type: 2}
+  _activeMenuPanel: {fileID: 11400000, guid: 46e488427186ab049b77464aa7437bbf, type: 2}
   _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
   _runtimeReference: {fileID: 11400000, guid: 229f94d8a01235944b9c47bbaf17c16f, type: 2}
   _infoMessagePanel: {fileID: 690148890}

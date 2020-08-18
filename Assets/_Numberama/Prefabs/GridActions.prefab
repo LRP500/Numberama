@@ -83,6 +83,7 @@ MonoBehaviour:
   _restartAction: {fileID: 6364204118992701268}
   _undoAction: {fileID: 6364204118837806364}
   _gameplayManager: {fileID: 0}
+  _store: {fileID: 11400000, guid: 0cd2a0ced1c5be346b088e88c20dade8, type: 2}
   _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
 --- !u!1001 &5867970258457793096
 PrefabInstance:

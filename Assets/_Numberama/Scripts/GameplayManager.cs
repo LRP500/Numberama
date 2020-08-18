@@ -63,6 +63,9 @@ namespace Numberama
         private Difficulty _difficulty = null;
 
         [SerializeField]
+        private MenuPanelVariable _activeMenuPanel = null;
+
+        [SerializeField]
         private GameMasterVariable _gameMaster = null;
 
         [SerializeField]
@@ -122,7 +125,14 @@ namespace Numberama
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _gameMaster.Value?.NavigateToMainMenu();
+                if (_activeMenuPanel.Value != null)
+                {
+                    _activeMenuPanel.Value.Close();
+                }
+                else
+                {
+                    _gameMaster.Value?.NavigateToMainMenu();
+                }
             }
         }
 

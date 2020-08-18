@@ -20,27 +20,30 @@ namespace Numberama
         private GameplayManager _gameplayManager = null;
 
         [SerializeField]
+        private NumberamaStoreVariable _store = null;
+
+        [SerializeField]
         private GameMasterVariable _gameMaster = null;
 
         private void Start()
         {
-            _checkAction.RegisterOnExecute(_gameplayManager.Check);
-            _restartAction.RegisterOnExecute(_gameplayManager.RestartWithNewNumbers);
-            _hintAction.RegisterOnExecute(_gameplayManager.AskForHint);
-            _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove);
+            _checkAction.RegisterOnExecute(_gameplayManager.Check, OnActionExecuteFail);
+            _restartAction.RegisterOnExecute(_gameplayManager.RestartWithNewNumbers, OnActionExecuteFail);
+            _hintAction.RegisterOnExecute(_gameplayManager.AskForHint, OnActionExecuteFail);
+            _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove, OnActionExecuteFail);
 
-#if DEVELOPMENT_BUILD || UNITY_EDITOR
-            _hintAction.SetPurchased(true);
-            _undoAction.SetPurchased(true);
-#else
-            _hintAction.SetPurchased(_gameMaster.Value.Store.IsHintBoosterPurchased());
-            _undoAction.SetPurchased(_gameMaster.Value.Store.IsUndoBoosterPurchased());
-#endif
+            _hintAction.SetPurchased(_store.Value.IsHintBoosterPurchased());
+            _undoAction.SetPurchased(_store.Value.IsUndoBoosterPurchased());
         }
 
         private void Update()
         {
             _undoAction.SetStackValue(_gameplayManager.UndoStackSize);
+        }
+
+        private void OnActionExecuteFail()
+        {
+            _gameMaster.Value?.OpenStore();
         }
 
         public GridAction GetAction(GridActionInfo action)

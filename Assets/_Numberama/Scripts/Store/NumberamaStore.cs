@@ -10,6 +10,22 @@ namespace Numberama
         public static readonly string UndoBoosterID = "numberama_undo_booster";
         public static readonly string BoosterBundleID = "numberama_booster_bundle";
 
+        [SerializeField]
+        private bool _setAllPurchased = true;
+
+        [SerializeField]
+        private NumberamaStoreVariable _runtimeReference = null;
+
+        private void Awake()
+        {
+            _runtimeReference.SetValue(this);
+        }
+
+        private void OnDestroy()
+        {
+            _runtimeReference.Clear();
+        }
+
         public override void AddProducts(ConfigurationBuilder builder)
         {
             builder.AddProduct(HintBoosterID, ProductType.NonConsumable);
@@ -47,6 +63,11 @@ namespace Numberama
 
         public bool IsBoosterBundlePurchased()
         {
+            if (_setAllPurchased)
+            {
+                return true;
+            }
+
             return PlayerPrefs.GetInt(BoosterBundleID) == 1 ? true : false;
         }
     }

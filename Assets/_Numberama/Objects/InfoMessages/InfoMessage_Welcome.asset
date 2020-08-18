@@ -35,8 +35,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
-          m_MethodName: OnClickLaunchGame
+        - m_Target: {fileID: 11400000, guid: 629e916e700864b4a90e7a348747dcfe, type: 2}
+          m_MethodName: OnSkipTutorial
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

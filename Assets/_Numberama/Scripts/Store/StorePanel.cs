@@ -5,7 +5,7 @@ namespace Numberama
     public class StorePanel : MenuPanel
     {
         [SerializeField]
-        private NumberamaStore _store = null;
+        private NumberamaStoreVariable _store = null;
 
         [SerializeField]
         private StoreItemSlot _hintBooster = null;
@@ -23,9 +23,9 @@ namespace Numberama
 
         private void Start()
         {
-            _hintBooster.SetPurchased(_store.IsHintBoosterPurchased());
-            _undoBooster.SetPurchased(_store.IsUndoBoosterPurchased());
-            _boosterBundle.SetPurchased(_store.IsBoosterBundlePurchased());
+            _hintBooster.SetPurchased(_store.Value.IsHintBoosterPurchased());
+            _undoBooster.SetPurchased(_store.Value.IsUndoBoosterPurchased());
+            _boosterBundle.SetPurchased(_store.Value.IsBoosterBundlePurchased());
         }
     }
 }

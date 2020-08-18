@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 62235117}
+  _activePanel: {fileID: 11400000, guid: 46e488427186ab049b77464aa7437bbf, type: 2}
 --- !u!1 &82164461
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +604,7 @@ GameObject:
   - component: {fileID: 196966177}
   - component: {fileID: 196966178}
   m_Layer: 0
-  m_Name: MainMenuController
+  m_Name: MainMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,8 +641,10 @@ MonoBehaviour:
   _newGameButton: {fileID: 2969008208155656843}
   _muteToggle: {fileID: 516258988}
   _colorThemeToggle: {fileID: 116433061}
-  _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
+  _activeMenuPanel: {fileID: 11400000, guid: 46e488427186ab049b77464aa7437bbf, type: 2}
   _audioManager: {fileID: 11400000, guid: a94b91a435a0f0242a9be0f4501d330d, type: 2}
+  _gameMaster: {fileID: 11400000, guid: b0deb51369e3be64284c442d4c000925, type: 2}
+  _runtimeReference: {fileID: 11400000, guid: 629e916e700864b4a90e7a348747dcfe, type: 2}
   _infoMessagePanel: {fileID: 247611496}
   _welcomeMessage: {fileID: 11400000, guid: 902467515197b074aab04103aafa5b57, type: 2}
 --- !u!1001 &247611494
@@ -664,7 +667,7 @@ PrefabInstance:
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 457.87827
+      value: 457.95856
       objectReference: {fileID: 0}
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -674,7 +677,7 @@ PrefabInstance:
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 787.75653
+      value: 787.9171
       objectReference: {fileID: 0}
     - target: {fileID: 3650988331377304689, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -799,7 +802,7 @@ PrefabInstance:
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 457.87827
+      value: 457.95856
       objectReference: {fileID: 0}
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -809,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 787.75653
+      value: 787.9171
       objectReference: {fileID: 0}
     - target: {fileID: 6136557638860234986, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -1360,6 +1363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mode: 1
   _text: {fileID: 598655232}
+  _overrideTransparency: 1
   _colorSchemeManager: {fileID: 11400000, guid: 281f8e5c6df56f44fb417be0719135a7,
     type: 2}
 --- !u!114 &598655232
@@ -1654,6 +1658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mode: 1
   _text: {fileID: 735215001}
+  _overrideTransparency: 1
   _colorSchemeManager: {fileID: 11400000, guid: 281f8e5c6df56f44fb417be0719135a7,
     type: 2}
 --- !u!1001 &889982051
@@ -2597,6 +2602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 1775155009}
+  _activePanel: {fileID: 11400000, guid: 46e488427186ab049b77464aa7437bbf, type: 2}
   _manager: {fileID: 11400000, guid: 281f8e5c6df56f44fb417be0719135a7, type: 2}
   _slotPrefab: {fileID: 1291189035997085923, guid: 22951b5a9579dc64a9144ecf7c9f87ad,
     type: 3}

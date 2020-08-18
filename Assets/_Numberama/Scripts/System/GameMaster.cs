@@ -9,6 +9,9 @@ namespace Numberama
         private bool _playTutorial = false;
 
         [SerializeField]
+        private StorePanel _storePanel = null;
+
+        [SerializeField]
         private NavigationManager _navigationManager = null;
 
         [SerializeField]
@@ -19,10 +22,6 @@ namespace Numberama
 
         [SerializeField]
         private SceneReference _tutorialScene = null;
-
-        [SerializeField]
-        private NumberamaStore _store = null;
-        public NumberamaStore Store => _store;
 
         [SerializeField]
         private GameplayManagerVariable _gameplayManager = null;
@@ -63,6 +62,11 @@ namespace Numberama
         public void LaunchTutorial()
         {
             StartCoroutine(_navigationManager.FastLoad(_tutorialScene));
+        }
+
+        public void OpenStore()
+        {
+            _storePanel?.Open();
         }
 
         #region Player Prefs

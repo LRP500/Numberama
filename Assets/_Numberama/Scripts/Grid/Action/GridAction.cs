@@ -25,7 +25,8 @@ namespace Numberama
         private float _reloadTime = 0f;
         private float _lastUseTime = 0f;
 
-        private GridActionCallback OnExecute = null;
+        private GridActionCallback OnExecuteSuccess = null;
+        private System.Action OnExecuteFail = null;
 
         private void Awake()
         {
@@ -55,17 +56,31 @@ namespace Numberama
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (CanUse())
+            {
+                Execute();
+            }
+            else
+            {
+                OnExecuteFail?.Invoke();
+            }
+        }
+
+        private void Execute()
+        {
+            OnExecuteSuccess?.Invoke();
             _lastUseTime = Time.time;
         }
 
-        public void RegisterOnExecute(GridActionCallback action)
+        public void RegisterOnExecute(GridActionCallback success, System.Action fail)
         {
-            OnExecute = action;
+            OnExecuteSuccess = success;
+            OnExecuteFail = fail;
         }
 
         public bool CanUse()
         {
-            return Time.time - _lastUseTime > _gridActionInfo.ReloadTime;
+            return Time.time - _lastUseTime > _reloadTime;
         }
     }
 }

@@ -8,18 +8,32 @@ namespace Numberama
         [SerializeField]
         private CanvasGroup _canvasGroup = null;
 
+        [SerializeField]
+        private MenuPanelVariable _activePanel = null;
+
         public bool IsOpen { get; private set; } = false;
+
+        private void OnDestroy()
+        {
+            if (_activePanel.Value == this)
+            {
+                _activePanel.Clear();
+            }
+        }
 
         public void Open()
         {
             Show();
             IsOpen = true;
+            _activePanel.Value?.Close();
+            _activePanel.SetValue(this);
         }
 
         public void Close()
         {
             Hide();
             IsOpen = false;
+            _activePanel.Clear();
         }
 
         [Button]
