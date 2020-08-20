@@ -13,7 +13,7 @@ namespace Numberama
 
         public void OnClickLaunchGame(Difficulty difficulty)
         {
-            Value?.LaunchGame(difficulty);
+            Value?.StartNewGame(difficulty);
         }
     }
 }

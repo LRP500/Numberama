@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tools.Persistence;
 using UnityEngine;
@@ -107,18 +108,9 @@ namespace Numberama
             _runtimeReference.SetValue(this);
         }
 
-        protected virtual void Start()
+        private void Start()
         {
-            if (_gameMaster.Value == null ||
-                !_gameMaster.Value.HasGameInProgress() ||
-                !_storage.SaveFileExists)
-            {
-                StartNewGame();
-            }
-            else
-            {
-                _storage.Load(_grid);
-            }
+            Initialize();
         }
 
         private void Update()
@@ -145,16 +137,24 @@ namespace Numberama
 
         #region Private Methods
 
-        protected virtual void StartNewGame()
+        protected virtual void Initialize()
         {
-            // Clear
-            _grid.Clear();
+            Debug.Log(_gameMaster.Value.HasGameInProgress());
 
-            // Initialize
-            _lastStartingNumbers = _grid.PushRange(_initialPush, _difficulty.Numbers);
+            if (_gameMaster.Value == null ||
+                !_gameMaster.Value.HasGameInProgress() ||
+                !_storage.SaveFileExists)
+            {
+                _grid.Clear();
+                _storage.ClearUndoHistory(_grid);
+                _lastStartingNumbers = _grid.PushRange(_initialPush, _difficulty.Numbers);
+                Save();
 
-            // Save
-            Save();
+            }
+            else
+            {
+                _storage.Load(_grid);
+            }
         }
 
         protected void Save()
@@ -241,8 +241,8 @@ namespace Numberama
 
         public bool RestartWithNewNumbers()
         {
-            StartNewGame();
-            _storage.ClearUndoHistory(_grid);
+            _gameMaster.Value.ClearSavedGame();
+            Initialize();
             return true;
         }
 

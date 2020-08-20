@@ -6,11 +6,21 @@ namespace Numberama
 {
     public class MainMenuManager : MonoBehaviour
     {
+        [Header("Panels")]
+
         [SerializeField]
         private ColorSchemeSelection _colorSchemePanel = null;
 
         [SerializeField]
         private DifficultySelection _difficultyPanel = null;
+
+        [SerializeField]
+        private GameSelection _gameSelection = null;
+
+        [SerializeField]
+        private MenuPanelVariable _activeMenuPanel = null;
+
+        [Header("Elements")]
 
         [SerializeField]
         private Button _newGameButton = null;
@@ -21,8 +31,15 @@ namespace Numberama
         [SerializeField]
         private SettingToggle _colorThemeToggle = null;
 
+        [Header("Info Messages")]
+
         [SerializeField]
-        private MenuPanelVariable _activeMenuPanel = null;
+        private InfoMessagePanel _infoMessagePanel = null;
+
+        [SerializeField]
+        private InfoMessage _welcomeMessage = null;
+
+        [Header("Managers")]
 
         [SerializeField]
         private AudioManagerVariable _audioManager = null;
@@ -32,14 +49,6 @@ namespace Numberama
 
         [SerializeField]
         private MainMenuManagerVariable _runtimeReference = null;
-
-        [Header("Info Messages")]
-
-        [SerializeField]
-        private InfoMessagePanel _infoMessagePanel = null;
-
-        [SerializeField]
-        private InfoMessage _welcomeMessage = null;
 
         private void Awake()
         {
@@ -89,11 +98,18 @@ namespace Numberama
 
         private void OnPlayButtonClicked()
         {
+            // First load
             if (PlayerPrefs.GetInt(PlayerPrefKeys.HasPlayedTutorial) == 0)
             {
                 _infoMessagePanel.Open(_welcomeMessage);
                 PlayerPrefs.SetInt(PlayerPrefKeys.HasPlayedTutorial, 1);
             }
+            // Game in progress
+            else if (PlayerPrefs.GetInt(PlayerPrefKeys.HasGameInProgress) == 1)
+            {
+                NavigateToGameSelection();
+            }
+            // No game in progress
             else
             {
                 NavigateToDifficultyChoice();
@@ -103,6 +119,11 @@ namespace Numberama
         public void NavigateToDifficultyChoice()
         {
             _difficultyPanel.Open();
+        }
+
+        public void NavigateToGameSelection()
+        {
+            _gameSelection.Open();
         }
     }
 }

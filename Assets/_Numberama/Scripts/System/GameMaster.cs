@@ -1,13 +1,11 @@
-﻿using Tools.Navigation;
+﻿using System;
+using Tools.Navigation;
 using UnityEngine;
 
 namespace Numberama
 {
     public class GameMaster : MonoBehaviour
     {
-        [SerializeField]
-        private bool _playTutorial = false;
-
         [SerializeField]
         private StorePanel _storePanel = null;
 
@@ -51,12 +49,19 @@ namespace Numberama
             StartCoroutine(_navigationManager.FastLoad(_mainMenuScene));
         }
 
-        public void LaunchGame(Difficulty difficulty)
+        public void StartNewGame(Difficulty difficulty)
         {
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 0);
+
             StartCoroutine(_navigationManager.FastLoad(_gameScene, () =>
             {
                 _gameplayManager.Value.SetDifficulty(difficulty);
             }));
+        }
+
+        public void ContinueGame()
+        {
+            StartCoroutine(_navigationManager.FastLoad(_gameScene));
         }
 
         public void LaunchTutorial()
@@ -81,20 +86,17 @@ namespace Numberama
 
         private bool IsFirstLoad()
         {
-#if UNITY_EDITOR
-            return _playTutorial;
-#endif
             return PlayerPrefs.HasKey(PlayerPrefKeys.FirstLoad);
         }
 
         public bool HasGameInProgress()
         {
-            if (IsFirstLoad())
-            {
-                return false;
-            }
-
             return PlayerPrefs.GetInt(PlayerPrefKeys.HasGameInProgress) == 1 ? true : false;
+        }
+
+        public void ClearSavedGame()
+        {
+            PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, 0);
         }
 
         #endregion Player Prefs
