@@ -22,8 +22,8 @@ namespace Numberama
         [SerializeField]
         private Slider _slider = null;
 
-        private float _reloadTime = 0f;
-        private float _lastUseTime = 0f;
+        private float _cooldownDuration = 0f;
+        private float _cooldownTimer = 0f;
 
         private GridActionCallback OnExecuteSuccess = null;
         private System.Action OnExecuteFail = null;
@@ -31,10 +31,10 @@ namespace Numberama
         private void Awake()
         {
             _image.sprite = _gridActionInfo.Icon;
-            _reloadTime = _gridActionInfo.ReloadTime;
+            _cooldownDuration = _gridActionInfo.ReloadTime;
             _slider.minValue = 0;
-            _slider.maxValue = _reloadTime;
-            _lastUseTime = float.MinValue;
+            _slider.maxValue = _cooldownDuration;
+            _cooldownTimer = _cooldownDuration;
         }
 
         public void SetStackValue(int value)
@@ -44,14 +44,25 @@ namespace Numberama
 
         public void SetPurchased(bool purchased)
         {
-            _reloadTime = purchased ? 0 : _gridActionInfo.ReloadTime;
-            _slider.maxValue = _reloadTime;
+            _cooldownDuration = purchased ? 0 : _gridActionInfo.ReloadTime;
+            _slider.maxValue = _cooldownDuration;
+        }
+
+        public float GetCooldown()
+        {
+            return _cooldownTimer;
+        }
+
+        public void SetCooldown(float value)
+        {
+            _cooldownTimer = value;
         }
 
         private void Update()
         {
-            float sliderValue = _slider.maxValue - (Time.time - _lastUseTime);
-            _slider.value = Mathf.Clamp(sliderValue, 0, _slider.maxValue);
+            _cooldownTimer -= Time.deltaTime;
+            _cooldownTimer = Mathf.Clamp(_cooldownTimer, 0, _cooldownDuration);
+            _slider.value = _cooldownTimer;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -68,8 +79,10 @@ namespace Numberama
 
         private void Execute()
         {
-            OnExecuteSuccess?.Invoke();
-            _lastUseTime = Time.time;
+            if (OnExecuteSuccess?.Invoke() == true)
+            {
+                _cooldownTimer = _cooldownDuration;
+            }
         }
 
         public void RegisterOnExecute(GridActionCallback success, System.Action fail)
@@ -80,7 +93,7 @@ namespace Numberama
 
         public bool CanUse()
         {
-            return Time.time - _lastUseTime > _reloadTime;
+            return _cooldownTimer <= 0;
         }
     }
 }

@@ -19,6 +19,9 @@ namespace Numberama
         private GridLayoutGroup _layout = null;
 
         [SerializeField]
+        protected GridActionManager _gridActionManager = null;
+
+        [SerializeField]
         private GameplayManager _gameplayManager = null;
 
         private GridCell[] _cells = null;
@@ -364,6 +367,8 @@ namespace Numberama
             {
                 _cells[i].Save(writer);
             }
+
+            _gridActionManager.Save(writer);
         }
 
         public void Load(GameDataReader reader)
@@ -378,6 +383,8 @@ namespace Numberama
                 cell.Load(reader);
                 _cells[i] = cell;
             }
+
+            _gridActionManager.Load(reader);
         }
 
         #endregion Persistence

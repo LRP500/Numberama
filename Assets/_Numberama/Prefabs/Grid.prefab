@@ -86,4 +86,5 @@ MonoBehaviour:
   _cellPrefab: {fileID: 1448667517714843053, guid: a93b24540e5d6704d9e993a93729ced7,
     type: 3}
   _layout: {fileID: 1192253851761248527}
+  _gridActionManager: {fileID: 0}
   _gameplayManager: {fileID: 0}

@@ -54,6 +54,9 @@ namespace Numberama
         protected Grid _grid = null;
 
         [SerializeField]
+        private GridActionManager _gridActionManager = null;
+
+        [SerializeField]
         protected int _initialPush = 20;
 
         [SerializeField]
@@ -124,6 +127,7 @@ namespace Numberama
                 }
                 else
                 {
+                    Save();
                     _gameMaster.Value?.NavigateToMainMenu();
                 }
             }
@@ -140,13 +144,12 @@ namespace Numberama
 
         protected virtual void Initialize()
         {
-            Debug.Log(_gameMaster.Value.HasGameInProgress());
-
             if (_gameMaster.Value == null ||
                 !_gameMaster.Value.HasGameInProgress() ||
                 !_storage.SaveFileExists)
             {
                 _grid.Clear();
+                _gridActionManager.ResetCooldowns();
                 _storage.ClearUndoHistory(_grid);
                 _lastStartingNumbers = _grid.PushRange(_initialPush, _difficulty.Numbers);
                 Save();

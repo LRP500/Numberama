@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Tools.Persistence;
+using UnityEngine;
 
 namespace Numberama
 {
-    public class GridActionManager : MonoBehaviour
+    public class GridActionManager : MonoBehaviour, IPersistable
     {
         [SerializeField]
         private GridAction _checkAction = null;
@@ -32,8 +33,11 @@ namespace Numberama
             _hintAction.RegisterOnExecute(_gameplayManager.AskForHint, OnActionExecuteFail);
             _undoAction.RegisterOnExecute(_gameplayManager.UndoLastMove, OnActionExecuteFail);
 
-            _hintAction.SetPurchased(_store.Value.IsHintBoosterPurchased());
-            _undoAction.SetPurchased(_store.Value.IsUndoBoosterPurchased());
+            if (_store.Value)
+            {
+                _hintAction.SetPurchased(_store.Value.IsHintBoosterPurchased());
+                _undoAction.SetPurchased(_store.Value.IsUndoBoosterPurchased());
+            }
         }
 
         private void Update()
@@ -66,6 +70,24 @@ namespace Numberama
             }
 
             return null;
+        }
+
+        public void ResetCooldowns()
+        {
+            _hintAction.SetCooldown(0);
+            _undoAction.SetCooldown(0);
+        }
+
+        public void Save(GameDataWriter writer)
+        {
+            writer.Write(_hintAction.GetCooldown());
+            writer.Write(_undoAction.GetCooldown());
+        }
+
+        public void Load(GameDataReader reader)
+        {
+            _hintAction.SetCooldown(reader.ReadFloat());
+            _undoAction.SetCooldown(reader.ReadFloat());
         }
     }
 }

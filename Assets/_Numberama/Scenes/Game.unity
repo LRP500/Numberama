@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &72156334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5867970258181760190, guid: 6b34c6ecf18569f4a882df55df80c9e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5867970258454706307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1fddaad72146e4f9001fdc70246cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &238095661
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,12 +298,12 @@ PrefabInstance:
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 485.91367
+      value: 458.2052
       objectReference: {fileID: 0}
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 843.82733
+      value: 788.4104
       objectReference: {fileID: 0}
     - target: {fileID: 3650988330758498091, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -421,12 +433,12 @@ PrefabInstance:
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 485.91367
+      value: 458.2052
       objectReference: {fileID: 0}
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 843.82733
+      value: 788.4104
       objectReference: {fileID: 0}
     - target: {fileID: 3650988332509611814, guid: b25386a86da655d4ca5f9ccbe145c340,
         type: 3}
@@ -836,6 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 1273181310}
+  _gridActionManager: {fileID: 72156334}
   _initialPush: 20
   _storage: {fileID: 1465355322}
   _difficulty: {fileID: 11400000, guid: d193bb7662cc10141b3198d75659b0ec, type: 2}
@@ -962,6 +975,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 1192253851761248524, guid: 9c71a2c92d609f44380c3244d460af65,
+        type: 3}
+      propertyPath: _gridActionManager
+      value: 
+      objectReference: {fileID: 72156334}
     - target: {fileID: 1192253851761248524, guid: 9c71a2c92d609f44380c3244d460af65,
         type: 3}
       propertyPath: _gameplayManager
