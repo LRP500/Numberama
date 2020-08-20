@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tools.Persistence;
 using UnityEngine;
@@ -72,16 +71,18 @@ namespace Numberama
         [SerializeField]
         private GameplayManagerVariable _runtimeReference = null;
 
+        [Header("Info Messages")]
+
         [SerializeField]
-        [BoxGroup("Info Messages")]
         private InfoMessagePanel _infoMessagePanel = null;
 
         [SerializeField]
-        [BoxGroup("Info Messages")]
-        private InfoMessage _noMoreMovesMessage = null;
+        private InfoMessage _boardFullMessage = null;
 
         [SerializeField]
-        [BoxGroup("Info Messages")]
+        private InfoMessage _gameOverMessage = null;
+
+        [SerializeField]
         private InfoMessage _victoryMessage = null;
 
         #endregion Serialized Fields
@@ -210,20 +211,23 @@ namespace Numberama
             // Failed
             else if (_grid.IsFull() && !_grid.GetNextAvailableMove(out MoveInfo move))
             {
-                List<int> remainingNumbers = _grid.GetRemainingNumbers();
-
                 // Clear all checked cells
-                if (remainingNumbers.Count != _grid.Size)
+                if (_grid.GetRemainingNumbers().Count != _grid.Size)
                 {
-                    _grid.Clear();
-                    _grid.PushRange(remainingNumbers);
+                    _infoMessagePanel.Open(_boardFullMessage);
                 }
                 // Nothing to clear
                 else
                 {
-                    _infoMessagePanel.Open(_noMoreMovesMessage);
+                    _infoMessagePanel.Open(_gameOverMessage);
                 }
             }
+        }
+
+        public void ClearCheckNumbers()
+        {
+            _grid.Clear();
+            _grid.PushRange(_grid.GetRemainingNumbers());
         }
 
         private void ResetHint()

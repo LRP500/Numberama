@@ -8,12 +8,17 @@ namespace Numberama
     {
         public void OnClickContinue()
         {
-            Value.RestartWithSameNumbers();
+            Value?.ClearCheckNumbers();
         }
 
-        public void OnClickRestart()
+        public void OnClickRestartWithSameNumbers()
         {
-            Value.RestartWithNewNumbers();
+            Value?.RestartWithSameNumbers();
+        }
+
+        public void OnClickRestartWithNewNumbers()
+        {
+            Value?.RestartWithNewNumbers();
         }
 
         public void OnClickGiveUp()
