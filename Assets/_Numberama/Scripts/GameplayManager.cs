@@ -229,8 +229,9 @@ namespace Numberama
 
         public void ClearCheckNumbers()
         {
+            List<int> remainingNumbers = _grid.GetRemainingNumbers();
             _grid.Clear();
-            _grid.PushRange(_grid.GetRemainingNumbers());
+            _grid.PushRange(remainingNumbers);
         }
 
         private void ResetHint()
