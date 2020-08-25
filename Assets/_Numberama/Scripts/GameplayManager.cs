@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tools.Persistence;
+using Tools.Variables;
 using UnityEngine;
 
 namespace Numberama
 {
-    public class GameplayManager : MonoBehaviour
+    public class GameplayManager : MonoBehaviour, IPersistable
     {
         #region Data Structures
 
@@ -60,10 +61,13 @@ namespace Numberama
         protected int _initialPush = 20;
 
         [SerializeField]
-        private PersistentStorage _storage = null;
+        private Difficulty _difficulty = null;
 
         [SerializeField]
-        private Difficulty _difficulty = null;
+        private FloatVariable _currentGameTime = null;
+
+        [SerializeField]
+        private PersistentStorage _storage = null;
 
         [SerializeField]
         private MenuPanelVariable _activeMenuPanel = null;
@@ -119,18 +123,8 @@ namespace Numberama
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (_activeMenuPanel.Value != null)
-                {
-                    _activeMenuPanel.Value.Close();
-                }
-                else
-                {
-                    Save();
-                    _gameMaster.Value?.NavigateToMainMenu();
-                }
-            }
+            HandleInput();
+            UpdateGameTimer();
         }
 
         private void OnDestroy()
@@ -152,8 +146,8 @@ namespace Numberama
                 _gridActionManager.ResetCooldowns();
                 _storage.ClearUndoHistory(_grid);
                 _lastStartingNumbers = _grid.PushRange(_initialPush, _difficulty.Numbers);
-                Save();
 
+                Save();
             }
             else
             {
@@ -163,7 +157,7 @@ namespace Numberama
 
         protected void Save()
         {
-            _storage.Save(_grid);
+            _storage.Save(this);
             PlayerPrefs.SetInt(PlayerPrefKeys.HasGameInProgress, _grid.IsEmpty ? 0 : 1);
             PlayerPrefs.Save();
         }
@@ -227,6 +221,22 @@ namespace Numberama
             }
         }
 
+        private void HandleInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_activeMenuPanel.Value != null)
+                {
+                    _activeMenuPanel.Value.Close();
+                }
+                else
+                {
+                    Save();
+                    _gameMaster.Value?.NavigateToMainMenu();
+                }
+            }
+        }
+
         public void ClearCheckNumbers()
         {
             List<int> remainingNumbers = _grid.GetRemainingNumbers();
@@ -243,6 +253,11 @@ namespace Numberama
         private void OnVictory()
         {
             _infoMessagePanel.Open(_victoryMessage);
+        }
+
+        private void UpdateGameTimer()
+        {
+            _currentGameTime.Add(Time.deltaTime);
         }
 
         #endregion Private Methods
@@ -341,5 +356,25 @@ namespace Numberama
         }
 
         #endregion Editor
+
+        #region IPersistable
+
+        public void Save(GameDataWriter writer)
+        {
+            writer.Write(_currentGameTime.Value);
+
+            // Grid
+            _grid.Save(writer);
+        }
+
+        public void Load(GameDataReader reader)
+        {
+            _currentGameTime.SetValue(reader.ReadFloat());
+
+            // Grid
+            _grid.Load(reader);
+        }
+
+        #endregion IPersistable
     }
 }

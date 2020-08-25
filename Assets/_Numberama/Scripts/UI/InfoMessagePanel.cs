@@ -108,6 +108,7 @@ namespace Numberama
         [Button]
         public void Show()
         {
+            Time.timeScale = 0;
             _canvasGroup.alpha = 1;
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
@@ -116,6 +117,7 @@ namespace Numberama
         [Button]
         public void Hide()
         {
+            Time.timeScale = 1;
             _canvasGroup.alpha = 0;
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
