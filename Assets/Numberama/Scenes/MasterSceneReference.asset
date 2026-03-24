@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 102900000, guid: 0d55f90fa2ae33746b4fe9a0bf6806bb, type: 3}
   name: Master
-  path: Assets/_Numberama/Scenes/Master.unity
+  path: Assets/Numberama/Scenes/Master.unity

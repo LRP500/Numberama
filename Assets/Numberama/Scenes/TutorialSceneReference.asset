@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 102900000, guid: a5fc583307130a140ba55e920b0bd00d, type: 3}
   name: Tutorial
-  path: Assets/_Numberama/Scenes/Tutorial.unity
+  path: Assets/Numberama/Scenes/Tutorial.unity

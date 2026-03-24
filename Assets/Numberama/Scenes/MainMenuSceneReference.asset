@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 102900000, guid: 77745451170e2804d9d6a7891495862e, type: 3}
   name: MainMenu
-  path: Assets/_Numberama/Scenes/MainMenu.unity
+  path: Assets/Numberama/Scenes/MainMenu.unity

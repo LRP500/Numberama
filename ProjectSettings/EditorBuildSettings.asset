@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Numberama/Scenes/Master.unity
+    path: Assets/Numberama/Scenes/Master.unity
     guid: 0d55f90fa2ae33746b4fe9a0bf6806bb
   - enabled: 1
-    path: Assets/_Numberama/Scenes/MainMenu.unity
+    path: Assets/Numberama/Scenes/MainMenu.unity
     guid: 77745451170e2804d9d6a7891495862e
   - enabled: 1
-    path: Assets/_Numberama/Scenes/Game.unity
+    path: Assets/Numberama/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/_Numberama/Scenes/Tutorial.unity
+    path: Assets/Numberama/Scenes/Tutorial.unity
     guid: a5fc583307130a140ba55e920b0bd00d
   m_configObjects: {}
