@@ -1,0 +1,63 @@
+﻿using System.Collections.Generic;
+using Numberama.System;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace Numberama.Color
+{
+    [CreateAssetMenu(menuName = "Numberama/Color Scheme Manager")]
+    public class ColorSchemeManager : ScriptableObject
+    {
+        [AssetList]
+        [SerializeField]
+        private List<ColorScheme> _colorSchemes = null;
+        public List<ColorScheme> ColorSchemes => _colorSchemes;
+
+        [SerializeField]
+        private ColorScheme _currentColorScheme = null;
+        public ColorScheme CurrentColorScheme => _currentColorScheme;
+
+        private global::System.Action OnColorSchemeChanged = null;
+
+        public void SetCurrentColorScheme(ColorScheme scheme)
+        {
+            _currentColorScheme = scheme;
+            PlayerPrefs.SetString(PlayerPrefKeys.ColorScheme, scheme.Name);
+            OnColorSchemeChanged?.Invoke();
+        }
+
+        public void SetCurrentColorScheme(string schemeName)
+        {
+            foreach (ColorScheme scheme in _colorSchemes)
+            {
+                if (scheme.Name == schemeName)
+                {
+                    SetCurrentColorScheme(scheme);
+                    return;
+                }
+            }
+
+            SetDefaultScheme();
+        }
+
+        public void SetDefaultScheme()
+        {
+            SetCurrentColorScheme(_colorSchemes[0]);
+        }
+
+        public void SetRandom()
+        {
+            SetCurrentColorScheme(_colorSchemes[Random.Range(0, _colorSchemes.Count)]);
+        }
+
+        public void RegisterOnColorSchemeChanged(global::System.Action action)
+        {
+            OnColorSchemeChanged += action;
+        }
+
+        public void UnregisterOnColorSchemeChanged(global::System.Action action)
+        {
+            OnColorSchemeChanged -= action;
+        }
+    }
+}

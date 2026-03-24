@@ -1,0 +1,80 @@
+﻿using System.Collections.Generic;
+using Numberama.Color;
+using Numberama.System;
+using UnityEngine;
+
+namespace Numberama.UI
+{
+    public class ColorSchemeSelection : MenuPanel
+    {
+        [SerializeField]
+        private ColorSchemeManager _manager = null;
+
+        [SerializeField]
+        private ColorSchemeSlot _slotPrefab = null;
+
+        [SerializeField]
+        private Transform _slotContainer = null;
+
+        private List<ColorSchemeSlot> _slots = null;
+
+        private ColorSchemeSlot _selected = null;
+
+        private void Awake()
+        {
+            Close();
+            Initialize();
+            LoadScheme();
+        }
+
+        private void LoadScheme()
+        {
+            if (PlayerPrefs.HasKey(PlayerPrefKeys.ColorScheme))
+            {
+                _manager.SetCurrentColorScheme(PlayerPrefs.GetString(PlayerPrefKeys.ColorScheme));
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (ColorSchemeSlot slot in _slots)
+            {
+                Destroy(slot.gameObject);
+            }
+
+            _slots.Clear();
+        }
+
+        private void Initialize()
+        {
+            _slots = new List<ColorSchemeSlot>();
+
+            foreach (ColorScheme scheme in _manager.ColorSchemes)
+            {
+                ColorSchemeSlot instance = Instantiate(_slotPrefab, _slotContainer);
+                instance.SetScheme(scheme);
+                instance.SetCallback(Select);
+
+                if (scheme == _manager.CurrentColorScheme)
+                {
+                    instance.SetSelected(true);
+                    _selected = instance;
+                }
+                else
+                {
+                    instance.SetSelected(false);
+                }
+
+                _slots.Add(instance);
+            }
+        }
+
+        private void Select(ColorSchemeSlot selection)
+        {
+            _manager.SetCurrentColorScheme(selection.Scheme);
+            _selected?.SetSelected(false);
+            _selected = selection;
+            _selected.SetSelected(true);
+        }
+    }
+}
